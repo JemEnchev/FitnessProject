@@ -1,4 +1,4 @@
-﻿namespace FitnessProject.Data
+﻿namespace FitnessProject.Infrastructure.Data
 {
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;

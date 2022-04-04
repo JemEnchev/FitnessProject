@@ -1,4 +1,4 @@
-﻿namespace FitnessProject.Data.Migrations
+﻿namespace FitnessProject.Infrastructure.Data.Migrations
 {
     using Microsoft.EntityFrameworkCore.Metadata;
     using Microsoft.EntityFrameworkCore.Migrations;

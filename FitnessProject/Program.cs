@@ -1,4 +1,4 @@
-using FitnessProject.Data;
+using FitnessProject.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
