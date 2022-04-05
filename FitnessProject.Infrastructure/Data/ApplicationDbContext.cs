@@ -40,20 +40,20 @@
                 .HasKey(we => new { we.ExerciseId, we.WorkoutId });
 
             modelBuilder.Entity<DietFood>()
-                .HasKey(df => new { df.DietPlanId, df.FoodId });
+                .HasKey(df => new { df.DietId, df.FoodId });
 
             modelBuilder.Entity<DietSupplement>()
-                .HasKey(ds => new { ds.DietPlanId, ds.SupplementId });
+                .HasKey(ds => new { ds.DietId, ds.SupplementId });
 
 
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<Diet> DietPlans { get; set; }
+        public DbSet<Diet> Diets { get; set; }
         
-        public DbSet<DietFood> DietPlanFoods { get; set; }
+        public DbSet<DietFood> DietFoods { get; set; }
         
-        public DbSet<DietSupplement> DietPlanSupplements { get; set; }
+        public DbSet<DietSupplement> DietSupplements { get; set; }
         
         public DbSet<Exercise> Exercises { get; set; }
         
