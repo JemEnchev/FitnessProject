@@ -1,5 +1,6 @@
 ﻿namespace FitnessProject.Infrastructure.Data.Models
 {
+    using FitnessProject.Infrastructure.Data.Models.Enums;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -22,14 +23,13 @@
         [ForeignKey(nameof(BrandId))]
         public SupplementBrand Brand { get; set; }
 
+
         [Required]
         [Range(0, 10)]
         public double Weight { get; set; }
 
         [Required]
-        public Guid TypeId { get; set; }
-
-        [ForeignKey(nameof(TypeId))]
+        [StringLength(50)]
         public SupplementType Type { get; set; }
 
 
@@ -38,5 +38,9 @@
 
         [ForeignKey(nameof(FlavourId))]
         public SupplementFlavour Flavour { get; set; }
+
+
+        public ICollection<DietSupplement> DietSupplements { get; set; }
+
     }
 }
