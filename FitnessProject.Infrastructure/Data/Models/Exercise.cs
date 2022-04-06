@@ -2,6 +2,7 @@
 {
     using FitnessProject.Infrastructure.Data.Models.Enums;
     using System.ComponentModel.DataAnnotations;
+    #nullable disable
 
     public class Exercise
     {

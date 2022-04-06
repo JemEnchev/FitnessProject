@@ -1,6 +1,7 @@
 ﻿namespace FitnessProject.Infrastructure.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
+    #nullable disable
 
     public class SupplementFlavour
     {

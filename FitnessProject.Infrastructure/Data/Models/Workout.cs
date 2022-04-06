@@ -3,6 +3,7 @@
     using FitnessProject.Infrastructure.Data.Identity;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    #nullable disable
 
     public class Workout
     {

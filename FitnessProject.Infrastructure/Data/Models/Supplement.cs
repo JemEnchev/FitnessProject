@@ -3,6 +3,7 @@
     using FitnessProject.Infrastructure.Data.Models.Enums;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    #nullable disable
 
     public class Supplement
     {
