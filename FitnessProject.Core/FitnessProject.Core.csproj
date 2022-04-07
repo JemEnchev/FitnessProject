@@ -10,4 +10,9 @@
     <ProjectReference Include="..\FitnessProject.Infrastructure\FitnessProject.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Contracts\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>
