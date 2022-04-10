@@ -2,7 +2,55 @@
 @model ConfirmEmailModel
 @{
     ViewData["Title"] = "Confirm email";
+    Layout = null;
 }
 
-<h1>@ViewData["Title"]</h1>
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+<!-- icheck bootstrap -->
+<link rel="stylesheet" href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="~/css/adminlte.min.css">
+
+
+<section class="hold-transition login-page">
+    <div class="login-box">
+        <div class="card card-outline card-primary">
+
+            <div class="card-header text-center">
+                <a href="/" class="h1"><b>Fitness</b>Project</a>
+            </div>
+
+            <br />
+            <partial name="_StatusMessage" model="Model.StatusMessage" />
+
+             <a asp-page="./Login" class="text-center">Login</a>
+             <br />
+
+        </div>
+    </div>
+</section>
+
+
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+
+<!-- jQuery -->
+<script src="~/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="~/js/adminlte.min.js"></script>
+}
+
+
+
+
+
+@*ORIGINAL CODE*@
+@*<h1>@ViewData["Title"]</h1>
+    <partial name="_StatusMessage" model="Model.StatusMessage" />
+*@
