@@ -1,5 +1,7 @@
 ﻿namespace Microsoft.Extensions.DependencyInjection 
 {
+    using FitnessProject.Core.Contracts;
+    using FitnessProject.Core.Services;
     using FitnessProject.Infrastructure.Data;
     using FitnessProject.Infrastructure.Data.Repositories;
     using Microsoft.EntityFrameworkCore;
@@ -9,6 +11,7 @@
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IApplicationDbRepository, ApplicationDbRepository>();
+            services.AddScoped<IUserService, UserService>();
 
             return services;
         }
