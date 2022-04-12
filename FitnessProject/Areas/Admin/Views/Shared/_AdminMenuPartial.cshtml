@@ -1,0 +1,18 @@
+﻿
+@*<li class="nav-item dropdown show">
+    <a class="dropdown-toggle nav-link text-dark" href="#" data-toggle="dropdown">Manage</a>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Users</a>
+        <a class="dropdown-item" asp-area="Admin" asp-controller="RoleManager" asp-action="Index">Roles</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" asp-area="Admin" asp-controller="UserRoles" asp-action="Index">User roles</a>
+        <a class="dropdown-item" asp-area="Admin" asp-controller="UserRoles" asp-action="Manage">Manage User roles</a>
+    </div>
+</li>*@
+
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="Admin" asp-controller="RoleManager" asp-action="Index">Roles</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="Admin" asp-controller="UserRoles" asp-action="Index">User roles</a>
+</li>
