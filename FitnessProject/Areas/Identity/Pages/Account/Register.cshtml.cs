@@ -133,9 +133,7 @@ namespace FitnessProject.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                //var user = CreateUser();
-
-                var user = new ApplicationUser() { FirstName = Input.FirstName, LastName = Input.LastName, Email = Input.Email};
+                var user = CreateUser();
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -145,6 +143,7 @@ namespace FitnessProject.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    await _userManager.AddToRoleAsync(user, UserConstants.Roles.User);
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -182,7 +181,13 @@ namespace FitnessProject.Areas.Identity.Pages.Account
         {
             try
             {
-                return Activator.CreateInstance<ApplicationUser>();
+                //return Activator.CreateInstance<ApplicationUser>();
+                return new ApplicationUser()
+                {
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName,
+                    Email = Input.Email
+                };
             }
             catch
             {
