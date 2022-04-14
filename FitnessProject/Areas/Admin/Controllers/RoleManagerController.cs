@@ -1,31 +1,38 @@
 ﻿namespace FitnessProject.Areas.Admin.Controllers
 {
+    using FitnessProject.Core.Contracts;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
 
     public class RoleManagerController : BaseController
     {
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IRoleService service;
 
-        public RoleManagerController(RoleManager<IdentityRole> roleManager)
+
+        public RoleManagerController(RoleManager<IdentityRole> _roleManager,
+            IRoleService _service)
         {
-            _roleManager = roleManager;
+            service = _service;
         }
+
 
         public async Task<IActionResult> Index()
         {
-            var roles = await _roleManager.Roles.ToListAsync();
+            var roles = await service.GetRolesAsync();
             return View(roles);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddRole(string roleName)
         {
-            if (roleName != null)
-            {
-                await _roleManager.CreateAsync(new IdentityRole(roleName.Trim()));
-            }
+            await service.CreateRoleAsync(roleName);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveRole(string roleName)
+        {
+            await service.RemoveRoleAsync(roleName);
             return RedirectToAction("Index");
         }
     }

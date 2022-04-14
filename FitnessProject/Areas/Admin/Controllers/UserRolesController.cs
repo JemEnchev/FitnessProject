@@ -1,6 +1,6 @@
 ﻿namespace FitnessProject.Areas.Admin.Controllers
 {
-    using FitnessProject.Areas.Admin.Models;
+    using FitnessProject.Core.Models;
     using FitnessProject.Infrastructure.Data.Identity;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
