@@ -6,11 +6,11 @@
 
     public class RoleManagerController : BaseController
     {
-        private readonly IRoleService service;
+        private readonly IRoleManagerService service;
 
 
         public RoleManagerController(RoleManager<IdentityRole> _roleManager,
-            IRoleService _service)
+            IRoleManagerService _service)
         {
             service = _service;
         }
