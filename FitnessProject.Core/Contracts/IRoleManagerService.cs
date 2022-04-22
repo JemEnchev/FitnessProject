@@ -3,7 +3,7 @@
     using FitnessProject.Core.Models;
     using Microsoft.AspNetCore.Identity;
 
-    public interface IRoleService
+    public interface IRoleManagerService
     {
         Task<IEnumerable<IdentityRole>> GetRolesAsync();
 

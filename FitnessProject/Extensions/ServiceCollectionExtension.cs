@@ -12,7 +12,8 @@
         {
             services.AddScoped<IApplicationDbRepository, ApplicationDbRepository>();
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IRoleManagerService, RoleManagerService>();
+            services.AddScoped<IUserManagerService, UserManagerService>();
 
             return services;
         }

@@ -9,17 +9,14 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    public class RoleService : IRoleService
+    public class RoleManagerService : IRoleManagerService
     {
         private readonly RoleManager<IdentityRole> roleManager;
 
-        private readonly IApplicationDbRepository repo;
-
-        public RoleService(RoleManager<IdentityRole> _roleManager,
+        public RoleManagerService(RoleManager<IdentityRole> _roleManager,
             IApplicationDbRepository _repo)
         {
             roleManager = _roleManager;
-            repo = _repo;
         }
 
 
@@ -40,7 +37,7 @@
 
         public async Task RemoveRoleAsync(string name)
         {
-            if (name != null)
+            if (!string.IsNullOrEmpty(name))
             {
                 // For safety reasons admins cannot remove Administrator and User role
                 // This may break the other logic
