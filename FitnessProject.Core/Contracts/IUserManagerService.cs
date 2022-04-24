@@ -18,8 +18,8 @@
 
         Task<IdentityResult> RemoveRolesAsync(ApplicationUser user, IEnumerable<string> roles);
 
-        Task DeleteUser(string userEmail);
+        Task DeleteUserAsync(string userEmail);
         
-        Task<ApplicationUser> CreateUser();
+        Task<IdentityResult> CreateUserAsync(CreateUser_VM model);
     }
 }

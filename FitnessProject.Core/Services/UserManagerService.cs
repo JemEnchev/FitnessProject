@@ -1,8 +1,11 @@
 ﻿namespace FitnessProject.Core.Services
 {
+    using FitnessProject.Core.Constants;
     using FitnessProject.Core.Contracts;
     using FitnessProject.Core.Models;
+    using FitnessProject.Infrastructure.Data.Common;
     using FitnessProject.Infrastructure.Data.Identity;
+    using FitnessProject.Infrastructure.Data.Repositories;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
@@ -14,11 +17,15 @@
 
         private readonly RoleManager<IdentityRole> roleManager;
 
+        private readonly IApplicationDbRepository repo;
+
         public UserManagerService(UserManager<ApplicationUser> _userManager,
-            RoleManager<IdentityRole> _roleManager)
+            RoleManager<IdentityRole> _roleManager,
+            IApplicationDbRepository _repo)
         {
             userManager = _userManager;
             roleManager = _roleManager;
+            repo = _repo;
         }
 
 
@@ -28,12 +35,14 @@
             var userRolesViewModel = new List<UserRoles_VM>();
             foreach (ApplicationUser user in users)
             {
-                var thisViewModel = new UserRoles_VM();
-                thisViewModel.UserId = user.Id;
-                thisViewModel.Email = user.Email;
-                thisViewModel.FirstName = user.FirstName;
-                thisViewModel.LastName = user.LastName;
-                thisViewModel.Roles = await GetUserRolesAsync(user);
+                var thisViewModel = new UserRoles_VM()
+                {
+                    UserId = user.Id,
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Roles = await GetUserRolesAsync(user)
+                };
                 userRolesViewModel.Add(thisViewModel);
             }
             return userRolesViewModel;
@@ -84,17 +93,24 @@
             return await userManager.RemoveFromRolesAsync(user, roles);
         }
 
-        public async Task DeleteUser(string userEmail)
+        public async Task DeleteUserAsync(string userEmail)
         {
             var user = userManager.Users
                 .FirstOrDefault(u => u.Email == userEmail);
             if (user != null)
-            await userManager.DeleteAsync(user);
+                await userManager.DeleteAsync(user);
         }
 
-        public Task<ApplicationUser> CreateUser()
+        public async Task<IdentityResult> CreateUserAsync(CreateUser_VM model)
         {
-            throw new NotImplementedException();
+            var user = new ApplicationUser()
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email,
+            };
+
+            return await userManager.CreateAsync(user, model.Password);
         }
     }
 }
