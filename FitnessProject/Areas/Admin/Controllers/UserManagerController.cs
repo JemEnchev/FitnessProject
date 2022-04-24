@@ -11,7 +11,7 @@
     {
         private readonly IUserManagerService service;
 
-        public UserManagerController(UserManager<ApplicationUser> _userManager, 
+        public UserManagerController(UserManager<ApplicationUser> _userManager,
             RoleManager<IdentityRole> _roleManager,
             IUserManagerService _service)
         {
@@ -73,15 +73,31 @@
         {
             if (!string.IsNullOrEmpty(userEmail))
             {
-                await service.DeleteUser(userEmail);
+                await service.DeleteUserAsync(userEmail);
             }
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateUser()
+        public IActionResult CreateUser()
         {
-            throw new Exception();
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateUser(CreateUser_VM model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await service.CreateUserAsync(model);
+
+                if (!result.Succeeded)
+                {
+                    foreach (IdentityError error in result.Errors)
+                        ModelState.AddModelError("", error.Description);
+                }
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }
