@@ -26,22 +26,6 @@
         }
 
 
-        [Authorize(Roles = UserConstants.Roles.Administrator)]
-        public async Task<IActionResult> ManageUsers()
-        {
-            var users = await service.GetUsersAsync();
-
-            return Ok(users);
-        }
-
-        public async Task<IActionResult> CreateRole()
-        {
-            await roleManager.CreateAsync(new IdentityRole()
-            {
-                Name = "User"
-            });
-
-            return Ok();
-        }
+       
     }
 }
