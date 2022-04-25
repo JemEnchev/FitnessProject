@@ -14,6 +14,9 @@
         public string Name { get; set; }
 
         [Required]
+        public ExerciseCategory Category { get; set; }
+
+        [Required]
         [StringLength(500)]
         public string? Description { get; set; }
 
