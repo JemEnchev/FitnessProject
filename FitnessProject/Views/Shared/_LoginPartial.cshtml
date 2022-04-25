@@ -3,25 +3,117 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-}
-</ul>
+<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+    <ul class="navbar-nav">
+        @if (SignInManager.IsSignedIn(User))
+        {
+
+            <li class="nav-item menu-close">
+
+                <a href="#" class="nav-link active">
+
+                    @*<div class="image">
+                        <img src="~/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
+                        </div>*@
+
+
+                    <i class="fas fa-user-circle" style="padding-left:20px"></i>
+                    <p style="padding-left:13px">
+                        @User.Identity?.Name
+                    </p>
+
+                </a>
+
+                <ul class="nav nav-treeview ">
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                            <i class="fas fa-address-card" style="padding-left: 20px;"></i>
+                            <p>Profile</p>
+                        </a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <button type="submit" class="nav-link btn">
+                                <a class="nav-link" style="text-align: left;padding-left: 20px;">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    <p>
+                                        Sign out
+                                    </p>
+                                </a>
+                            </button>
+                        </form>
+                    </li>
+
+
+
+                    @*  <li class="nav-item d-none d-sm-inline-block">
+                        <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index">
+                        <i class="fas fa-edit"></i>
+                        <p>
+                        Manage
+                        </p>
+                        </a>
+                        </li>*@
+
+
+
+
+                </ul>
+            </li>
+
+
+
+
+            @*  <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                <img src="~/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                <a href="#" class="d-block">@User.Identity?.Name</a>
+                </div>
+                </div>*@
+
+            @*<li class="nav-item">
+                <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+                </li>*@
+
+            @* <li class="nav-item">
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                </form>
+                </li>*@
+
+
+
+
+
+
+
+
+        }
+        else
+        {
+            <li class="nav-item" style="padding-left: 15px;">
+                <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <p>
+                        Sign in
+                    </p>
+                </a>
+            </li>
+
+            <li class="nav-item" style="padding-left: 15px;">
+                <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <p>
+                        Register
+                    </p>
+                </a>
+            </li>
+        }
+
+    </ul>
+</div>

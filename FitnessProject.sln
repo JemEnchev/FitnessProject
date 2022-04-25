@@ -5,9 +5,9 @@ VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessProject", "FitnessProject\FitnessProject.csproj", "{E3DC083A-6EE7-442B-9348-3A1D4ECD45C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessProject.Core", "FitnessProject.Core\FitnessProject.Core.csproj", "{AAADD71B-14DE-40D9-8A27-81E7F05DDCED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessProject.Core", "FitnessProject.Core\FitnessProject.Core.csproj", "{AAADD71B-14DE-40D9-8A27-81E7F05DDCED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessProject.Infrastructure", "FitnessProject.Infrastructure\FitnessProject.Infrastructure.csproj", "{97678BD4-6610-418C-94DC-EBB575A94F09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessProject.Infrastructure", "FitnessProject.Infrastructure\FitnessProject.Infrastructure.csproj", "{97678BD4-6610-418C-94DC-EBB575A94F09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

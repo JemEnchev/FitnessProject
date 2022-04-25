@@ -1,38 +1,201 @@
-﻿<nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Starter Pages
-                <i class="right fas fa-angle-left"></i>
-              </p>
+﻿@using FitnessProject.Core.Constants
+@using FitnessProject.Infrastructure.Data.Identity
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+
+<nav class="mt-2">
+
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
+
+        <partial name="_LoginPartial" />
+
+        <li class="nav-item">
+            <a href="/" class="nav-link">
+                <i class="fas fa-home"></i>
+                <p>Home</p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Active Page</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inactive Page</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
+        </li>
+
+
+       
+        <!-- FOODS -->
+
+        <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Simple Link
-                <span class="right badge badge-danger">New</span>
-              </p>
+                <i class="fas fa-apple-alt"></i>
+                <p>
+                    Foods
+                    <i class="fas fa-angle-left right"></i>
+                </p>
             </a>
-          </li>
+
+            <ul class="nav nav-treeview list-group" style="display: none;">
+
+                <li class="nav-item">
+                    <a href="layout/top-nav.html" class="nav-link" style="width: auto;">
+                        <i class="fas fa-cubes"></i>
+                        <p>All</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="layout/top-nav-sidebar.html" class="nav-link" style="width: auto;">
+                        <i class="fas fa-heart"></i>
+                        <p>Favourites</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="layout/boxed.html" class="nav-link" style="width: auto;">
+                        <i class="fas fa-plus"></i>
+                        <p>Create</p>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+        
+        <!-- DIETS -->
+
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="fas fa-newspaper"></i>
+                <p>
+                    Diets
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+
+            <ul class="nav nav-treeview list-group" style="display: none;">
+
+                <li class="nav-item">
+                    <a href="layout/top-nav.html" class="nav-link" style="width: auto;">
+                        <i class="fas fa-cubes"></i>
+                        <p>My Diets</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="layout/boxed.html" class="nav-link" style="width: auto;">
+                        <i class="fas fa-plus"></i>
+                        <p>Create</p>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+
+
+        <!-- EXERCISES -->
+
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="fas fa-dumbbell"></i>
+                <p>
+                    Exercises
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+
+            <ul class="nav nav-treeview list-group" style="display: none;">
+
+                <li class="nav-item">
+                    <a href="layout/top-nav.html" class="nav-link" style="width: auto;">
+                        <i class="fas fa-cubes"></i>
+                        <p>All</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="layout/top-nav-sidebar.html" class="nav-link" style="width: auto;">
+                        <i class="fas fa-heart"></i>
+                        <p>Favourites</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="layout/boxed.html" class="nav-link" style="width: auto;">
+                        <i class="fas fa-plus"></i>
+                        <p>Create</p>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+
+        <!-- WORKOUTS -->
+
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="fas fa-fire-alt"></i>
+                <p>
+                    Workouts
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+
+            <ul class="nav nav-treeview list-group" style="display: none;">
+
+                <li class="nav-item">
+                    <a href="layout/top-nav.html" class="nav-link" style="width: auto;">
+                        <i class="fas fa-cubes"></i>
+                        <p>My Workouts</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="layout/boxed.html" class="nav-link" style="width: auto;">
+                        <i class="fas fa-plus"></i>
+                        <p>Create</p>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+
+
+
+        @if (@User.IsInRole(UserConstants.Roles.Administrator))
+        {
+            <li class="nav-item d-none d-sm-inline-block">
+                <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-edit"></i>
+                    <p>
+                        Manage
+                    </p>
+                </a>
+            </li>
+        }
+
+
+
+    </ul>
+
+    <div class="fixed-bottom" style="width: 2%;">
+        <ul class="nav nav-pills nav-sidebar flex-column" role="menu" data-accordion="false" style="padding-left: 8px;">
+
+            <li class="nav-item">
+                <a asp-controller="AboutUs" asp-action="About" class="nav-link">
+                    <i class="fas fa-info-circle"></i>
+                    <p>
+                        About us
+                    </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a asp-controller="AboutUs" asp-action="Contact" class="nav-link">
+                    <i class="fas fa-comments"></i>
+                    <p>
+                        Contact us
+                    </p>
+                </a>
+            </li>
+            <br>
         </ul>
-      </nav>
+    </div>
+</nav>
