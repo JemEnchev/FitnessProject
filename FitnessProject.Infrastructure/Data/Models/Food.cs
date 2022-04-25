@@ -36,6 +36,8 @@
         public byte FatPer100 { get; set; }
 
 
-        public ICollection<DietFood> DietFoods { get; set; }
+        public ICollection<DietFood> DietFoods { get; set; } = new List<DietFood>();
+
+        public ICollection<UserFood> UserFoods { get; set; } = new List<UserFood>();
     }
 }

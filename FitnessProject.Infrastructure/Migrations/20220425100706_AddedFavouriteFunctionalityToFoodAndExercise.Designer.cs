@@ -4,6 +4,7 @@ using FitnessProject.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220425100706_AddedFavouriteFunctionalityToFoodAndExercise")]
+    partial class AddedFavouriteFunctionalityToFoodAndExercise
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -328,7 +330,7 @@ namespace FitnessProject.Infrastructure.Migrations
 
                     b.HasIndex("ExerciseId");
 
-                    b.ToTable("UserExercises");
+                    b.ToTable("UserExercise");
                 });
 
             modelBuilder.Entity("FitnessProject.Infrastructure.Data.Models.UserFood", b =>
@@ -343,22 +345,7 @@ namespace FitnessProject.Infrastructure.Migrations
 
                     b.HasIndex("FoodId");
 
-                    b.ToTable("UserFoods");
-                });
-
-            modelBuilder.Entity("FitnessProject.Infrastructure.Data.Models.UserSupplement", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid>("SupplementId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("UserId", "SupplementId");
-
-                    b.HasIndex("SupplementId");
-
-                    b.ToTable("UserSupplements");
+                    b.ToTable("UserFood");
                 });
 
             modelBuilder.Entity("FitnessProject.Infrastructure.Data.Models.Workout", b =>
@@ -645,25 +632,6 @@ namespace FitnessProject.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("FitnessProject.Infrastructure.Data.Models.UserSupplement", b =>
-                {
-                    b.HasOne("FitnessProject.Infrastructure.Data.Models.Supplement", "Supplement")
-                        .WithMany("UserSupplements")
-                        .HasForeignKey("SupplementId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FitnessProject.Infrastructure.Data.Identity.ApplicationUser", "User")
-                        .WithMany("FavouriteSupplements")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Supplement");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("FitnessProject.Infrastructure.Data.Models.Workout", b =>
                 {
                     b.HasOne("FitnessProject.Infrastructure.Data.Identity.ApplicationUser", "User")
@@ -753,8 +721,6 @@ namespace FitnessProject.Infrastructure.Migrations
 
                     b.Navigation("FavouriteFoods");
 
-                    b.Navigation("FavouriteSupplements");
-
                     b.Navigation("Workouts");
                 });
 
@@ -782,8 +748,6 @@ namespace FitnessProject.Infrastructure.Migrations
             modelBuilder.Entity("FitnessProject.Infrastructure.Data.Models.Supplement", b =>
                 {
                     b.Navigation("DietSupplements");
-
-                    b.Navigation("UserSupplements");
                 });
 
             modelBuilder.Entity("FitnessProject.Infrastructure.Data.Models.Workout", b =>

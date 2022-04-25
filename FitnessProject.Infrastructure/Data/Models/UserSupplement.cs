@@ -1,16 +1,16 @@
 ﻿namespace FitnessProject.Infrastructure.Data.Models
 {
+    using FitnessProject.Infrastructure.Data.Identity;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    #nullable disable
 
-    public class DietSupplement
+    public class UserSupplement
     {
         [Required]
-        public Guid DietId { get; set; }
+        public string UserId { get; set; }
 
-        [ForeignKey(nameof(DietId))]
-        public Diet Diet { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public ApplicationUser User { get; set; }
 
 
         [Required]

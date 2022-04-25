@@ -3,21 +3,9 @@
     using FitnessProject.Infrastructure.Data.Identity;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    #nullable disable
 
-    public class Workout
+    public class UserFood
     {
-        [Key]
-        public Guid Id { get; set; } = Guid.NewGuid();
-
-        [Required]
-        [StringLength(50)]
-        public string Name { get; set; }
-
-        [StringLength(500)]
-        public string? Description { get; set; }
-
-
         [Required]
         public string UserId { get; set; }
 
@@ -25,6 +13,10 @@
         public ApplicationUser User { get; set; }
 
 
-        public ICollection<WorkoutExercise> Exercises { get; set; } = new List<WorkoutExercise>();
+        [Required]
+        public Guid FoodId { get; set; }
+
+        [ForeignKey(nameof(FoodId))]
+        public Food Food { get; set; }
     }
 }

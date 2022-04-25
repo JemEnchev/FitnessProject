@@ -25,9 +25,9 @@
         public ApplicationUser User { get; set; }
 
 
-        public ICollection<DietFood> DietFoods { get; set; }
+        public ICollection<DietFood> DietFoods { get; set; } = new List<DietFood>();
         
-        public ICollection<DietSupplement> DietSupplements { get; set; }
+        public ICollection<DietSupplement> DietSupplements { get; set; } = new List<DietSupplement>();
 
     }
 }

@@ -18,5 +18,11 @@
         public ICollection<Workout> Workouts { get; set; } = new List<Workout>();
 
         public ICollection<Diet> Diets { get; set; } = new List<Diet>();
+
+        public ICollection<UserExercise> FavouriteExercises { get; set; } = new List<UserExercise>();
+
+        public ICollection<UserFood> FavouriteFoods { get; set; } = new List<UserFood>();
+
+        public ICollection<UserSupplement> FavouriteSupplements { get; set; } = new List<UserSupplement>();
     }
 }

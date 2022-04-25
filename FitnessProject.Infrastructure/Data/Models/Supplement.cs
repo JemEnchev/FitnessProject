@@ -41,7 +41,9 @@
         public SupplementFlavour Flavour { get; set; }
 
 
-        public ICollection<DietSupplement> DietSupplements { get; set; }
+        public ICollection<DietSupplement> DietSupplements { get; set; } = new List<DietSupplement>();
+
+        public ICollection<UserSupplement> UserSupplements { get; set; } = new List<UserSupplement>();
 
     }
 }

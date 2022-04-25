@@ -30,6 +30,8 @@
         public ExerciseDifficulty Difficulty { get; set; }
 
 
-        public ICollection<WorkoutExercise> WorkoutExercises { get; set; }
+        public ICollection<WorkoutExercise> WorkoutExercises { get; set; } = new List<WorkoutExercise>();
+
+        public ICollection<UserExercise> UserExercises { get; set; } = new List<UserExercise>();
     }
 }

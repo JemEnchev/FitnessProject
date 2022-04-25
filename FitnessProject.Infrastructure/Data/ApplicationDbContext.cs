@@ -44,7 +44,16 @@
                 .HasKey(df => new { df.DietId, df.FoodId });
 
             modelBuilder.Entity<DietSupplement>()
-                .HasKey(ds => new { ds.DietId, ds.SupplementId });
+                .HasKey(ds => new { ds.DietId, ds.SupplementId }); 
+            
+            modelBuilder.Entity<UserExercise>()
+                .HasKey(ue => new { ue.UserId, ue.ExerciseId });
+
+            modelBuilder.Entity<UserFood>()
+                .HasKey(uf => new { uf.UserId, uf.FoodId });
+
+            modelBuilder.Entity<UserSupplement>()
+               .HasKey(us => new { us.UserId, us.SupplementId });
 
 
             base.OnModelCreating(modelBuilder);
@@ -69,5 +78,11 @@
         public DbSet<Workout> Workouts { get; set; }
         
         public DbSet<WorkoutExercise> WorkoutExercises { get; set; }
+
+        public DbSet<UserExercise> UserExercises { get; set; }
+
+        public DbSet<UserFood> UserFoods { get; set; }
+
+        public DbSet<UserSupplement> UserSupplements { get; set; }
     }
 }
