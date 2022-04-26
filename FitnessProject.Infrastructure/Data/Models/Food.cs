@@ -1,5 +1,6 @@
 ﻿namespace FitnessProject.Infrastructure.Data.Models
 {
+    using FitnessProject.Infrastructure.Data.Models.Enums;
     using System.ComponentModel.DataAnnotations;
     #nullable disable
 
@@ -14,7 +15,7 @@
 
         [Required]
         [StringLength(50)]
-        public string Type { get; set; }
+        public FoodType Type { get; set; }
 
         [StringLength(500)]
         public string? Description { get; set; }
