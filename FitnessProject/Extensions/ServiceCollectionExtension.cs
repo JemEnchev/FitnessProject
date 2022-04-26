@@ -11,9 +11,9 @@
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IApplicationDbRepository, ApplicationDbRepository>();
-            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRoleManagerService, RoleManagerService>();
             services.AddScoped<IUserManagerService, UserManagerService>();
+            services.AddScoped<IValidationService, ValidationService>();
 
             return services;
         }
