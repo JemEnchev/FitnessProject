@@ -13,5 +13,11 @@
         {
             return View();
         }
+
+        //[HttpPost]
+        //public IActionResult Contact()
+        //{
+
+        //}
     }
 }

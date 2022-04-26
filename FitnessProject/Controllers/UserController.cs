@@ -8,17 +8,17 @@
     using Microsoft.AspNetCore.Mvc;
 
 
-    public class UserController : BaseController
+    public class UserController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
 
         private readonly UserManager<ApplicationUser> userManager;
 
-        private readonly IUserService service;
+        private readonly IUserManagerService service;
 
         public UserController(RoleManager<IdentityRole> _roleManager,
             UserManager<ApplicationUser> _userManager,
-            IUserService _service)
+            IUserManagerService _service)
         {
             roleManager = _roleManager;
             userManager = _userManager;
