@@ -1,0 +1,89 @@
+﻿@using FitnessProject.Infrastructure.Data.Models.Enums
+@model FitnessProject.Core.Models.AddSupplement_VM
+
+@{
+    ViewData["Title"] = "Add Supplement";
+}
+
+<br />
+
+<div class="row justify-content-center">
+    <div class="col-6">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Add Supplement</h3>
+            </div>
+
+
+            <form method="post">
+                <div class="card-body">
+
+                    <div class="form-group">
+                        <label asp-for="Name">Name</label>
+                        <input type="text" class="form-control" asp-for="Name" placeholder="Enter name...">
+                        <span asp-validation-for="Name"></span>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label asp-for="Type">Type</label>
+                                <select asp-for="Type" asp-items="Html.GetEnumSelectList<SupplementType>()" class="form-control">
+                                    <option value="" selected disabled>Select type</option>
+                                </select>
+                                <span asp-validation-for="Type"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label asp-for="Weight">Weight (kg)</label>
+                                <input type="number" class="form-control" asp-for="Weight" placeholder="Enter weight...">
+                                <span asp-validation-for="Weight"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label asp-for="FlavourId">Flavour</label>
+                               @* <select asp-for="FlavourId" asp-items="@Model.Flavours" class="form-control">
+                                    <option value="" selected disabled>Select flavour</option>
+                                </select>*@
+                                <span asp-validation-for="FlavourId"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label asp-for="BrandId">Brand</label>
+                        @*<select asp-for="BrandId" asp-items="@Model.Brands" class="form-control">
+                            <option value="" selected disabled>Select brand</option>
+                        </select>*@
+                        <span asp-validation-for="BrandId"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="Description">Description</label><br />
+                        <textarea class="form-control" asp-for="Description" placeholder="Enter description..." style="height:100px; width:-webkit-fill-available;" spellcheck="false"></textarea>
+                        <span asp-validation-for="Description"></span>
+                    </div>
+
+
+
+                </div>
+
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
