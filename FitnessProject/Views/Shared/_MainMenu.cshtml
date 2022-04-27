@@ -35,7 +35,7 @@
             <ul class="nav nav-treeview list-group" style="display: none;">
 
                 <li class="nav-item">
-                    <a  class="nav-link" style="width: auto;">
+                    <a asp-controller="Food" asp-action="AllFood" class="nav-link" style="width: auto;">
                         <i class="fas fa-cubes"></i>
                         <p>All</p>
                     </a>
@@ -45,7 +45,7 @@
                 {
 
                     <li class="nav-item">
-                        <a href="layout/top-nav-sidebar.html" class="nav-link" style="width: auto;">
+                        <a a asp-controller="Food" asp-action="Favourites" asp-route-userEmail="@User.Identity?.Name" class="nav-link" style="width: auto;">
                             <i class="fas fa-heart"></i>
                             <p>Favourites</p>
                         </a>
@@ -55,7 +55,7 @@
                    User.IsInRole(UserConstants.Roles.Administrator))
                     {
                         <li class="nav-item">
-                            <a asp-controller="Food" asp-action="Add" class="nav-link" style="width: auto;">
+                            <a asp-controller="Food" asp-action="AddFood" class="nav-link" style="width: auto;">
                                 <i class="fas fa-plus"></i>
                                 <p>Add</p>
                             </a>
@@ -129,6 +129,119 @@
         </li>
 
 
+        <!-- SUPPLEMENTS -->
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="fas fa-prescription-bottle"></i>
+                <p>
+                    Supplements
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+
+            <ul class="nav nav-treeview list-group" style="display: none;">
+
+                <li class="nav-item">
+                    <a asp-controller="Food" asp-action="AllFood" class="nav-link" style="width: auto;">
+                        <i class="fas fa-cubes"></i>
+                        <p>All</p>
+                    </a>
+                </li>
+
+                @if (SignInManager.IsSignedIn(User))
+                {
+
+                    <li class="nav-item">
+                        <a href="layout/top-nav-sidebar.html" class="nav-link" style="width: auto;">
+                            <i class="fas fa-heart"></i>
+                            <p>Favourites</p>
+                        </a>
+                    </li>
+
+                    @if (User.IsInRole(UserConstants.Roles.Nutritionist) ||
+                   User.IsInRole(UserConstants.Roles.Administrator))
+                    {
+                        <li class="nav-item">
+                            <a asp-controller="Supplement" asp-action="AddSupplement" class="nav-link" style="width: auto;">
+                                <i class="fas fa-plus"></i>
+                                <p>Add</p>
+                            </a>
+                        </li>
+
+                        <!-- SUPPLEMENT BRANDS -->
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-book-open"></i>
+                                <p>
+                                    Brands
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+
+                            <ul class="nav nav-treeview list-group" style="display: none;">
+
+                                <li class="nav-item">
+                                    <a asp-controller="SupplementBrand" asp-action="AllBrands" class="nav-link" style="width: auto;">
+                                        <i class="fas fa-cubes"></i>
+                                        <p>All</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a asp-controller="SupplementBrand" asp-action="AddBrand" class="nav-link" style="width: auto;">
+                                        <i class="fas fa-plus"></i>
+                                        <p>Add</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <!-- SUPPLEMENT FLAVOURS -->
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fab fa-pagelines"></i>
+                                <p>
+                                    Flavours
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+
+                            <ul class="nav nav-treeview list-group" style="display: none;">
+
+                                <li class="nav-item">
+                                    <a asp-controller="SupplementFlavour" asp-action="AllFlavours" class="nav-link" style="width: auto;">
+                                        <i class="fas fa-cubes"></i>
+                                        <p>All</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a asp-controller="SupplementFlavour" asp-action="AddFlavour" class="nav-link" style="width: auto;">
+                                        <i class="fas fa-plus"></i>
+                                        <p>Add</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    }
+
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a asp-area="Identity" asp-page="/Account/Login" class="nav-link" style="width: auto;">
+                            <i class="fas fa-heart"></i>
+                            <p>Favourites</p>
+                        </a>
+                    </li>
+                }
+
+
+            </ul>
+        </li>
+
 
         <!-- EXERCISES -->
 
@@ -144,7 +257,7 @@
             <ul class="nav nav-treeview list-group" style="display: none;">
 
                 <li class="nav-item">
-                    <a href="layout/top-nav.html" class="nav-link" style="width: auto;">
+                    <a asp-controller="Exercise" asp-action="AllExercises" class="nav-link" style="width: auto;">
                         <i class="fas fa-cubes"></i>
                         <p>All</p>
                     </a>
@@ -153,7 +266,7 @@
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <li class="nav-item">
-                        <a href="layout/top-nav-sidebar.html" class="nav-link" style="width: auto;">
+                        <a asp-controller="Exercise" asp-action="Favourites" asp-route-userEmail="@User.Identity?.Name" class="nav-link" style="width: auto;">
                             <i class="fas fa-heart"></i>
                             <p>Favourites</p>
                         </a>
@@ -163,7 +276,7 @@
                    User.IsInRole(UserConstants.Roles.Administrator))
                     {
                         <li class="nav-item">
-                            <a href="layout/boxed.html" class="nav-link" style="width: auto;">
+                            <a asp-controller="Exercise" asp-action="AddExercise" class="nav-link" style="width: auto;">
                                 <i class="fas fa-plus"></i>
                                 <p>Add</p>
                             </a>
