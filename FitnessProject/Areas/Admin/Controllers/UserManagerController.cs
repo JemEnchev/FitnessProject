@@ -1,5 +1,6 @@
 ﻿namespace FitnessProject.Areas.Admin.Controllers
 {
+    using FitnessProject.Core.Constants;
     using FitnessProject.Core.Contracts;
     using FitnessProject.Core.Models;
     using FitnessProject.Infrastructure.Data.Identity;
@@ -55,6 +56,7 @@
             var result = await service.RemoveRolesAsync(user, roles);
             if (!result.Succeeded)
             {
+                ViewData[MessageConstant.ErrorMessage] = "An error occured!";
                 ModelState.AddModelError("", "Cannot remove user existing roles");
                 return View(model);
             }
@@ -62,9 +64,13 @@
             result = await service.AddRolesAsync(user, model);
             if (!result.Succeeded)
             {
+                ViewData[MessageConstant.ErrorMessage] = "An error occured!";
                 ModelState.AddModelError("", "Cannot add selected roles to user");
                 return View(model);
             }
+
+            ViewData[MessageConstant.SuccessMessage] = "Successfully editted user roles!";
+
             return RedirectToAction("Index");
         }
 
@@ -88,13 +94,13 @@
         {
             if (ModelState.IsValid)
             {
-                var result = await service.CreateUserAsync(model);
+                await service.CreateUserAsync(model);
 
-                if (!result.Succeeded)
-                {
-                    foreach (IdentityError error in result.Errors)
-                        ModelState.AddModelError("", error.Description);
-                }
+                //if (!result.Succeeded)
+                //{
+                //    foreach (IdentityError error in result.Errors)
+                //        ModelState.AddModelError("", error.Description);
+                //}
             }
 
             return RedirectToAction("Index");
