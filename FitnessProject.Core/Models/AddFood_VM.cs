@@ -1,16 +1,16 @@
 ﻿namespace FitnessProject.Core.Models
 {
+    using FitnessProject.Infrastructure.Data.Models.Enums;
     using System.ComponentModel.DataAnnotations;
 
     public class AddFood_VM
     {
         [Required]
-        [StringLength(50)]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "{0} must be between {1} and {2} characters")]
         public string Name { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "{0} must be between {2} and {1} characters")]
-        public string Type { get; set; }
+        public FoodType Type { get; set; }
 
         [StringLength(500)]
         public string? Description { get; set; }
