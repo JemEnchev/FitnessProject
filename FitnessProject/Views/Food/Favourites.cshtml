@@ -1,0 +1,138 @@
+﻿@using FitnessProject.Core.Models
+@model List<FoodList_VM>
+
+@{
+    ViewData["Title"] = "Favourite Food";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Data table with all favourite food macronutrients</h3>
+    </div>
+
+    <div class="card-body">
+        <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+            <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                <div class="col-sm-12">
+                    <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
+                        <thead>
+                            <tr>
+                                <th class="col-2">
+                                    Name
+                                </th>
+
+                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">
+                                    Type
+                                </th>
+
+                                <th class="col-1">
+                                    Calories
+                                </th>
+
+                                <th class="col-1">
+                                    Protein per 100
+                                </th>
+
+                                <th class="col-1">
+                                    Carbs per 100
+                                </th>
+
+                                <th class="col-1">
+                                    Fat per 100
+                                </th>
+
+                                <th>
+                                    Description
+                                </th>
+
+                                <th class="col-1">
+                                    Remove
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var food in Model)
+                            {
+                                <tr>
+                                    <td>@food.Name</td>
+                                    <td>@food.Type</td>
+                                    <td>@food.CaloriesPer100</td>
+                                    <td>@food.ProteinPer100</td>
+                                    <td>@food.CarbsPer100</td>
+                                    <td>@food.FatPer100</td>
+                                    <td>@food.Description</td>
+                                    <td class=" text-center">
+                                        <form asp-page-handler="Delete" method="OnGetDelete" onclick="return confirm('Are you sure you want to remove this?')">
+                                                <a class="btn btn-block btn-danger btn-sm" asp-controller="Food" asp-action="RemoveFromFavourites" asp-route-foodName="@food.Name" asp-route-userEmail="@User.Identity?.Name">
+                                                    <i class="fas fa-heart-broken"></i>
+                                                </a>
+                                            </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-5"></div>
+                <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                        <ul class="pagination">
+                            <li class="paginate_button page-item previous disabled" id="example2_previous">
+                                <a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">
+                                    Previous
+                                </a>
+                            </li>
+
+                            <li class="paginate_button page-item active">
+                                <a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
+                                    1
+                                </a>
+                            </li>
+
+                            <li class="paginate_button page-item ">
+                                <a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">
+                                    2
+                                </a>
+                            </li>
+
+                            <li class="paginate_button page-item ">
+                                <a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">
+                                    3
+                                </a>
+                            </li>
+
+                            <li class="paginate_button page-item ">
+                                <a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">
+                                    4
+                                </a>
+                            </li>
+
+                            <li class="paginate_button page-item ">
+                                <a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">
+                                    5
+                                </a>
+                            </li>
+
+                            <li class="paginate_button page-item ">
+                                <a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">
+                                    6
+                                </a>
+                            </li>
+
+                            <li class="paginate_button page-item next" id="example2_next">
+                                <a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">
+                                    Next
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

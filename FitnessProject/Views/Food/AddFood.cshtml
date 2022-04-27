@@ -1,0 +1,91 @@
+﻿@using FitnessProject.Infrastructure.Data.Models.Enums
+@model FitnessProject.Core.Models.AddFood_VM
+
+@{
+    ViewData["Title"] = "Add Food";
+}
+
+<br />
+
+<div class="row justify-content-center">
+    <div class="col-6">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Add Food</h3>
+            </div>
+
+
+            <form method="post">
+                <div class="card-body">
+
+                    <div class="form-group">
+                        <label asp-for="Name">Name</label>
+                        <input type="text" class="form-control" asp-for="Name" placeholder="Enter name...">
+                        <span asp-validation-for="Name"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Type">Category</label>
+                        <select asp-for="Type" asp-items="Html.GetEnumSelectList<FoodType>()" class="form-control">
+                            <option value="" selected disabled>Select category</option>
+                        </select>
+                        <span asp-validation-for="Type"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="Description">Description</label><br />
+                        <textarea class="form-control" asp-for="Description" placeholder="Enter description..." style="height:100px; width:-webkit-fill-available;" spellcheck="false"></textarea>
+                        <span asp-validation-for="Description"></span>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label asp-for="CaloriesPer100">Calories per 100 grams</label>
+                                <input type="number" class="form-control" asp-for="CaloriesPer100" placeholder="Enter calories...">
+                                <span asp-validation-for="CaloriesPer100"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label asp-for="ProteinPer100">Protein per 100 grams</label>
+                                <input type="number" class="form-control" asp-for="ProteinPer100" placeholder="Enter protein...">
+                                <span asp-validation-for="ProteinPer100"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label asp-for="CarbsPer100">Carbs per 100 grams</label>
+                                <input type="number" class="form-control" asp-for="CarbsPer100" placeholder="Enter carbs...">
+                                <span asp-validation-for="CarbsPer100"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label asp-for="FatPer100">Fat per 100 grams</label>
+                                <input type="number" class="form-control" asp-for="FatPer100" placeholder="Enter fat...">
+                                <span asp-validation-for="FatPer100"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
