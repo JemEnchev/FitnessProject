@@ -170,6 +170,10 @@ namespace FitnessProject.Infrastructure.Migrations
                     b.Property<int>("Difficulty")
                         .HasColumnType("int");
 
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsItBodyweight")
                         .HasColumnType("bit");
 

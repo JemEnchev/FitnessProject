@@ -29,6 +29,9 @@
         [Required]
         public ExerciseDifficulty Difficulty { get; set; }
 
+        [Required]
+        public string Image { get; set; }
+
 
         public ICollection<WorkoutExercise> WorkoutExercises { get; set; } = new List<WorkoutExercise>();
 
