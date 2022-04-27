@@ -13,8 +13,7 @@
     {
         private readonly RoleManager<IdentityRole> roleManager;
 
-        public RoleManagerService(RoleManager<IdentityRole> _roleManager,
-            IApplicationDbRepository _repo)
+        public RoleManagerService(RoleManager<IdentityRole> _roleManager)
         {
             roleManager = _roleManager;
         }
@@ -25,7 +24,6 @@
             return await roleManager.Roles.ToListAsync();
         }
 
-
         public async Task CreateRoleAsync(string name)
         {
             if (name != null)
@@ -34,7 +32,6 @@
             }
         }
         
-
         public async Task RemoveRoleAsync(string name)
         {
             if (!string.IsNullOrEmpty(name))
