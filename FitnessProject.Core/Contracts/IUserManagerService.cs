@@ -12,6 +12,8 @@
 
         Task<ApplicationUser> GetUserByIdAsync(string userId);
 
+        Task<ApplicationUser> GetUserByEmailAsync(string userEmail);
+
         Task<IEnumerable<ManageUserRoles_VM>> ManageUserRolesAsync(ApplicationUser user);
 
         Task<IdentityResult> AddRolesAsync(ApplicationUser user, IEnumerable<ManageUserRoles_VM> model);
@@ -20,6 +22,6 @@
 
         Task DeleteUserAsync(string userEmail);
         
-        Task<IdentityResult> CreateUserAsync(CreateUser_VM model);
+        Task CreateUserAsync(CreateUser_VM model);
     }
 }

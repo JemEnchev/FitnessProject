@@ -95,13 +95,12 @@
 
         public async Task DeleteUserAsync(string userEmail)
         {
-            var user = userManager.Users
-                .FirstOrDefault(u => u.Email == userEmail);
+            var user = await GetUserByEmailAsync(userEmail);
             if (user != null)
                 await userManager.DeleteAsync(user);
         }
 
-        public async Task<IdentityResult> CreateUserAsync(CreateUser_VM model)
+        public async Task CreateUserAsync(CreateUser_VM model)
         {
             var user = new ApplicationUser()
             {
@@ -110,7 +109,20 @@
                 Email = model.Email,
             };
 
-            return await userManager.CreateAsync(user, model.Password);
+            await userManager.CreateAsync(user, model.Password);
+
+            await userManager.AddToRoleAsync(user, UserConstants.Roles.User);
+
+            await repo.AddAsync(user);
+            await repo.SaveChangesAsync();
+
+            //return await userManager.CreateAsync(user, model.Password);
+        }
+
+        public async Task<ApplicationUser> GetUserByEmailAsync(string userEmail)
+        {
+            return await repo.All<ApplicationUser>()
+                .FirstOrDefaultAsync(u => u.Email == userEmail);
         }
     }
 }
