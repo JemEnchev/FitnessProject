@@ -1,0 +1,106 @@
+﻿@using FitnessProject.Infrastructure.Data.Models.Enums
+@model FitnessProject.Core.Models.AddExercise_VM
+
+@{
+    ViewData["Title"] = "Add Exercise";
+}
+
+<br />
+
+<div class="row justify-content-center">
+    <div class="col-6">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Add Exercise</h3>
+            </div>
+
+
+            <form method="post" enctype="multipart/form-data">
+                <div class="card-body">
+
+                    <div class="form-group">
+                        <label asp-for="Name">Name</label>
+                        <input type="text" class="form-control" asp-for="Name" placeholder="Enter name...">
+                        <span asp-validation-for="Name"></span>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label asp-for="Category">Category</label>
+                                <select asp-for="Category" asp-items="Html.GetEnumSelectList<ExerciseCategory>()" class="form-control">
+                                    <option value="" selected disabled>Select category</option>
+                                </select>
+                                <span asp-validation-for="Category"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label asp-for="IsItBodyweight">Is it bodyweight</label>
+                                <select asp-for="IsItBodyweight" class="form-control">
+                                    <option value="" selected disabled>Select</option>
+                                    <option value="true">Yes</option>
+                                    <option value="false">No</option>
+                                </select>
+                                <span asp-validation-for="IsItBodyweight"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label asp-for="Difficulty">Difficulty</label>
+                                <select asp-for="Difficulty" asp-items="Html.GetEnumSelectList<ExerciseDifficulty>()" class="form-control">
+                                    <option value="" selected disabled>Select difficulty</option>
+                                </select>
+                                <span asp-validation-for="Difficulty"></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <label asp-for="Description">Description</label><br />
+                        <textarea class="form-control" asp-for="Description" placeholder="Enter description..." style="height:100px; width:-webkit-fill-available;" spellcheck="false"></textarea>
+                        <span asp-validation-for="Description"></span>
+                    </div>
+
+                    <br />
+
+
+                    <div class="row">
+                        <div class="col-8">
+                            <div>
+                                <label asp-for="Requirements">Requirements</label><br />
+                                <textarea class="form-control" asp-for="Requirements" placeholder="Enter requirements..." style="height:100px; width:-webkit-fill-available;" spellcheck="false"></textarea>
+                                <span asp-validation-for="Requirements"></span>
+                            </div>
+                        </div>
+                        <div class="col-4">
+
+                            <br /><br />
+
+                            <div class="form-control" style="text-align-last: center;">
+                                <label asp-for="Image">Image</label>
+                                <input class="form-control" asp-for="Image" placeholder="Browse">
+                                <span asp-validation-for="Image" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+
+                </div>
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+}
