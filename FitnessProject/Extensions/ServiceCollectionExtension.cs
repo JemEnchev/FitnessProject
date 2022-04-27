@@ -13,8 +13,12 @@
             services.AddScoped<IApplicationDbRepository, ApplicationDbRepository>();
             services.AddScoped<IRoleManagerService, RoleManagerService>();
             services.AddScoped<IUserManagerService, UserManagerService>();
-            services.AddScoped<IValidationService, ValidationService>();
-
+            services.AddScoped<IFoodService, FoodService>();
+            services.AddScoped<ISupplementService, SupplementService>();
+            services.AddScoped<ISupplementBrandService, SupplementBrandService>();
+            services.AddScoped<ISupplementFlavourService, SupplementFlavourService>();
+            services.AddScoped<IExerciseService, ExerciseService>();
+           
             return services;
         }
 
