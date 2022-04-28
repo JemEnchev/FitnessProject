@@ -32,6 +32,8 @@
         [Required]
         public string Image { get; set; }
 
+        public string? Video { get; set; }
+
 
         public ICollection<WorkoutExercise> WorkoutExercises { get; set; } = new List<WorkoutExercise>();
 
