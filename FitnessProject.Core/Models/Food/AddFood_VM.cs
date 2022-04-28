@@ -6,7 +6,7 @@
     public class AddFood_VM
     {
         [Required]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "{0} must be between {1} and {2} characters")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "{0} must be between {2} and {1} characters")]
         public string Name { get; set; }
 
         [Required]

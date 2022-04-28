@@ -1,10 +1,9 @@
 ﻿namespace FitnessProject.Core.Models
 {
     using FitnessProject.Infrastructure.Data.Models.Enums;
-    using Microsoft.AspNetCore.Http;
     using System.ComponentModel.DataAnnotations;
 
-    public class AddExercise_VM
+    public class Exercise_VM
     {
         [Required]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "{0} must be between {1} and {2} characters")]
@@ -27,6 +26,8 @@
         public ExerciseDifficulty Difficulty { get; set; }
 
         [Required]
-        public IFormFile Image { get; set; }
+        public string Image { get; set; }
+
+        public string? Video { get; set; }
     }
 }

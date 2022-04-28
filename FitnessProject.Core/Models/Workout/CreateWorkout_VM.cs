@@ -1,11 +1,11 @@
-﻿namespace FitnessProject.Core.Models
+﻿namespace FitnessProject.Core.Models.Workout
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class AddFlavour_VM
+    public class CreateWorkout_VM
     {
         [Required]
-        [StringLength(100, MinimumLength = 3, ErrorMessage = "{0} must be between {1} and {2} characters")]
+        [StringLength(50, MinimumLength = 1, ErrorMessage = "{0} must be between {2} and {1} characters")]
         public string Name { get; set; }
 
         [StringLength(500)]
