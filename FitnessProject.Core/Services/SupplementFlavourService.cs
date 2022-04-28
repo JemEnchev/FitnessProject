@@ -17,7 +17,7 @@
             repo = _repo;
         }
 
-        public async Task AddSupplementFlavourAsync(AddSupplementFlavour_VM model)
+        public async Task AddSupplementFlavourAsync(AddFlavour_VM model)
         {
             var flavour = new SupplementFlavour()
             {
@@ -25,7 +25,7 @@
                 Description = model.Description,
             };
 
-            if (repo.All<SupplementFlavour>().FirstOrDefault(b => b.Name == model.Name) != null)
+            if (repo.All<SupplementFlavour>().FirstOrDefault(f => f.Name == model.Name) != null)
             {
                 return;
             }
@@ -43,6 +43,12 @@
                     Description = f.Description,
                 })
                 .ToListAsync();
+        }
+
+        public async Task<SupplementFlavour> GetFlavourByIdAsync(Guid flavourId)
+        {
+            return await repo.All<SupplementFlavour>()
+                .FirstOrDefaultAsync(f => f.Id == flavourId);
         }
 
         public async Task<SupplementFlavour> GetFlavourByNameAsync(string flavourName)

@@ -2,7 +2,6 @@
 {
     using FitnessProject.Core.Contracts;
     using FitnessProject.Core.Models;
-    using FitnessProject.Infrastructure.Data.Identity;
     using FitnessProject.Infrastructure.Data.Models;
     using FitnessProject.Infrastructure.Data.Repositories;
     using Microsoft.AspNetCore.Hosting;
@@ -41,10 +40,11 @@
                 IsItBodyweight = model.IsItBodyweight,
                 Requirements = model.Requirements,
                 Difficulty = model.Difficulty,
-                Image = stringFileName
+                Image = stringFileName,
+                Video = model.Video,
             };
 
-            if (repo.All<Exercise>().FirstOrDefault(f => f.Name == exercise.Name) != null)
+            if (repo.All<Exercise>().FirstOrDefault(e => e.Name == exercise.Name) != null)
             {
                 return;
             }
@@ -69,19 +69,20 @@
             return fileName;
         }
 
-        public async Task<IEnumerable<Exercise>> GetAllExercisesAsync()
+        public async Task<IEnumerable<Exercise_VM>> GetAllExercisesAsync()
         {
             return await repo.All<Exercise>()
-                 //.Select(e => new AddExercise_VM()
-                 //{
-                 //    Name = e.Name,
-                 //    Category = e.Category,
-                 //    Description = e.Description,
-                 //    IsItBodyweight = e.IsItBodyweight,
-                 //    Requirements = e.Requirements,
-                 //    Difficulty = e.Difficulty,
-                 //    Image = e.Image
-                 //})
+                 .Select(e => new Exercise_VM()
+                 {
+                     Name = e.Name,
+                     Category = e.Category,
+                     Description = e.Description,
+                     IsItBodyweight = e.IsItBodyweight,
+                     Requirements = e.Requirements,
+                     Difficulty = e.Difficulty,
+                     Image = e.Image,
+                     Video = e.Video,
+                 })
                  .ToListAsync();
         }
 
@@ -102,9 +103,20 @@
             { }
         }
 
-        private async Task<Exercise> GetExerciseByNameAsync(string exerciseName)
+        public async Task<Exercise> GetExerciseByNameAsync(string exerciseName)
         {
             return await repo.All<Exercise>()
+                //.Where(e => e.Name == exerciseName)
+                //.Select(e => new Exercise_VM()
+                //{
+                //    Name = e.Name,
+                //    Category = e.Category,
+                //    Description = e.Description,
+                //    IsItBodyweight = e.IsItBodyweight,
+                //    Requirements = e.Requirements,
+                //    Difficulty = e.Difficulty,
+                //    Image = e.Image,
+                //})
                 .FirstOrDefaultAsync(e => e.Name == exerciseName);
         }
 
@@ -137,13 +149,13 @@
             }
         }
 
-        public async Task<IEnumerable<Exercise>> GetAllFavouritesAsync(string userEmail)
+        public async Task<IEnumerable<Exercise_VM>> GetAllFavouritesAsync(string userEmail)
         {
             var user = await userManagerService.GetUserByEmailAsync(userEmail);
 
             return await repo.All<UserExercise>()
                 .Where(u => u.User.Email == userEmail)
-                .Select(e => new Exercise()
+                .Select(e => new Exercise_VM()
                 {
                     Name = e.Exercise.Name,
                     Category = e.Exercise.Category,
@@ -152,6 +164,7 @@
                     Difficulty = e.Exercise.Difficulty,
                     Description = e.Exercise.Description,
                     Image = e.Exercise.Image,
+                    Video = e.Exercise.Video
                 })
                 .ToListAsync();
         }

@@ -45,6 +45,12 @@
                 .ToListAsync();
         }
 
+        public async Task<SupplementBrand> GetBrandByIdAsync(Guid brandId)
+        {
+            return await repo.All<SupplementBrand>()
+                .FirstOrDefaultAsync(b => b.Id == brandId);
+        }
+
         public async Task<SupplementBrand> GetBrandByNameAsync(string brandName)
         {
             return await repo.All<SupplementBrand>()

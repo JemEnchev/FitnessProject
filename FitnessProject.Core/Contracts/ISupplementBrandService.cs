@@ -12,5 +12,7 @@
         Task RemoveSupplementBrandAsync(string brandName);
 
         Task<SupplementBrand> GetBrandByNameAsync(string brandName);
+
+        Task<SupplementBrand> GetBrandByIdAsync(Guid brandId);
     }
 }

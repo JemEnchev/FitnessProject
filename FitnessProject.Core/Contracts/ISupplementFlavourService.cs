@@ -7,10 +7,12 @@
     {
         Task<IEnumerable<FlavourList_VM>> GetAllSupplementFlavoursAsync();
 
-        Task AddSupplementFlavourAsync(AddSupplementFlavour_VM model);
+        Task AddSupplementFlavourAsync(AddFlavour_VM model);
 
         Task RemoveSupplementFlavourAsync(string flavourName);
 
         Task<SupplementFlavour> GetFlavourByNameAsync(string flavourName);
+
+        Task<SupplementFlavour> GetFlavourByIdAsync(Guid flavourId);
     }
 }
