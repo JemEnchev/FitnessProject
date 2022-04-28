@@ -3,10 +3,9 @@
     public enum SupplementType
     {
         Pills = 0,
-        Poweder = 1,
-        Tablets = 2,
-        Capsules = 3,
-        Gummies = 4,
-        Drink = 5,
+        Powder = 1,
+        Capsules = 2,
+        Gummies = 3,
+        Drink = 4,
     }
 }
