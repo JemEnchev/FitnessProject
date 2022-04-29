@@ -1,0 +1,63 @@
+﻿@model FitnessProject.Core.Models.Diet.Diet_VM
+
+@{
+    ViewData["Title"] = "Add Diet";
+}
+
+<br />
+
+<div class="row justify-content-center">
+    <div class="col-6">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Add Diet</h3>
+            </div>
+
+
+            <form method="post">
+                <div class="card-body">
+
+                    <div class="form-group">
+                        <label asp-for="Name">Name</label>
+                        <input type="text" class="form-control" asp-for="Name" placeholder="Enter name...">
+                        <span asp-validation-for="Name"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="Description">Description</label><br />
+                        <textarea class="form-control" asp-for="Description" placeholder="Enter description..." style="height:100px; width:-webkit-fill-available;" spellcheck="false"></textarea>
+                        <span asp-validation-for="Description"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="Breakfast">Breakfast</label><br />
+                        <textarea class="form-control" asp-for="Breakfast" placeholder="Enter breakfast..." style="height:100px; width:-webkit-fill-available;" spellcheck="false"></textarea>
+                        <span asp-validation-for="Breakfast"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="Lunch">Lunch</label><br />
+                        <textarea class="form-control" asp-for="Lunch" placeholder="Enter lunch..." style="height:100px; width:-webkit-fill-available;" spellcheck="false"></textarea>
+                        <span asp-validation-for="Lunch"></span>
+                    </div>
+
+                    <div>
+                        <label asp-for="Dinner">Dinner</label><br />
+                        <textarea class="form-control" asp-for="Dinner" placeholder="Enter dinner..." style="height:100px; width:-webkit-fill-available;" spellcheck="false"></textarea>
+                        <span asp-validation-for="Dinner"></span>
+                    </div>
+
+                </div>
+
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+<partial name="_ValidationScriptsPartial" />
+}

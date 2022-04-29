@@ -1,0 +1,129 @@
+﻿@using FitnessProject.Core.Constants
+@using FitnessProject.Core.Models
+@using FitnessProject.Core.Models.Diet
+@using FitnessProject.Infrastructure.Data.Models
+@model List<Diet_VM>
+
+@{
+    ViewData["Title"] = "My Diets";
+}
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="~/css/exercise.css">
+<link rel="stylesheet" href="~/css/workout.css">
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">My Diets</h3>
+    </div>
+
+    <div class="card-body">
+        <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+            <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                <div class="col-sm-12">
+
+                    <div class="cards">
+
+                        @foreach (var diet in Model)
+                        {
+                            <div class="card">
+                                <div class="card__content">
+
+                                    <p>
+                                        @diet.Name
+                                    </p>
+
+                                    <br>
+
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <a class="btn btn-block btn-info btn-sm" asp-controller="Diet" asp-action="DietInfo" asp-route-dietName="@diet.Name">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </a>
+                                            </div>
+
+                                            <div class="col-6">
+                                                <form asp-page-handler="Delete" method="OnGetDelete" onclick="return confirm('Are you sure you want to delete this?')">
+                                                    <a class="btn btn-block btn-danger btn-sm" asp-controller="Diet" asp-action="Delete" asp-route-dietName="@diet.Name">
+                                                        <i class="fas fa-times"></i>
+                                                    </a>
+                                                </form>
+                                            </div>
+
+                                        </div>
+
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+            @*<div class="row">
+                <div class="col-sm-12 col-md-5"></div>
+                <div class="col-sm-12 col-md-7">
+                    <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                        <ul class="pagination">
+                            <li class="paginate_button page-item previous disabled" id="example2_previous">
+                                <a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">
+                                    Previous
+                                </a>
+                            </li>
+
+                            <li class="paginate_button page-item active">
+                                <a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
+                                    1
+                                </a>
+                            </li>
+
+                            <li class="paginate_button page-item ">
+                                <a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">
+                                    2
+                                </a>
+                            </li>
+
+                            <li class="paginate_button page-item ">
+                                <a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">
+                                    3
+                                </a>
+                            </li>
+
+                            <li class="paginate_button page-item ">
+                                <a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">
+                                    4
+                                </a>
+                            </li>
+
+                            <li class="paginate_button page-item ">
+                                <a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">
+                                    5
+                                </a>
+                            </li>
+
+                            <li class="paginate_button page-item ">
+                                <a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">
+                                    6
+                                </a>
+                            </li>
+
+                            <li class="paginate_button page-item next" id="example2_next">
+                                <a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">
+                                    Next
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>*@
+        </div>
+    </div>
+
+</div>
+
+
