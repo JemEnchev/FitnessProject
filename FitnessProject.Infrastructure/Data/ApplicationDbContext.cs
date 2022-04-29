@@ -36,10 +36,6 @@
                .IsUnique();
 
 
-
-            modelBuilder.Entity<WorkoutExercise>()
-                .HasKey(we => new { we.ExerciseId, we.WorkoutId });
-
             modelBuilder.Entity<DietFood>()
                 .HasKey(df => new { df.DietId, df.FoodId });
 
@@ -74,10 +70,6 @@
         public DbSet<SupplementBrand> SupplementBrands { get; set; }
         
         public DbSet<SupplementFlavour> SupplementFlavours { get; set; }
-        
-        public DbSet<Workout> Workouts { get; set; }
-        
-        public DbSet<WorkoutExercise> WorkoutExercises { get; set; }
 
         public DbSet<UserExercise> UserExercises { get; set; }
 

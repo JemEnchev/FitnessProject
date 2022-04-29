@@ -15,8 +15,19 @@
         public string Name { get; set; }
 
         [StringLength(500)]
-        public string? Description { get; set; }
+        public string Description { get; set; }
 
+        [Required]
+        [StringLength(500)]
+        public string Breakfast { get; set; }
+
+        [Required]
+        [StringLength(500)]
+        public string Lunch { get; set; }
+
+        [Required]
+        [StringLength(500)]
+        public string Dinner { get; set; }
 
         [Required]
         public string UserId { get; set; }
