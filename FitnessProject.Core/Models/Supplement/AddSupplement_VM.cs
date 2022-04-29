@@ -16,7 +16,7 @@
         public string? Description { get; set; }
 
         [Required]
-        [Range(0, 10, ErrorMessage = "{0} must be between {1} and {2} characters")]
+        [Range(0, 10, ErrorMessage = "{0} must be between {1} and {2}")]
         public double Weight { get; set; }
 
         [Required]

@@ -1,5 +1,6 @@
 ﻿namespace FitnessProject.Areas.Admin.Controllers
 {
+    using FitnessProject.Core.Constants;
     using FitnessProject.Core.Contracts;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -25,15 +26,39 @@
         [HttpPost]
         public async Task<IActionResult> AddRole(string roleName)
         {
-            await service.CreateRoleAsync(roleName);
-            return RedirectToAction("Index");
+            try
+            {
+                await service.CreateRoleAsync(roleName);
+
+                ViewData[MessageConstant.SuccessMessage] = "Role added successfully!";
+            }
+            catch (Exception)
+            {
+                ViewData[MessageConstant.ErrorMessage] = "Something went wrong!";
+            }
+
+            var roles = await service.GetRolesAsync();
+
+            return View(nameof(Index), roles);
         }
 
         [HttpPost]
         public async Task<IActionResult> RemoveRole(string roleName)
         {
-            await service.RemoveRoleAsync(roleName);
-            return RedirectToAction("Index");
+            try
+            {
+                await service.RemoveRoleAsync(roleName);
+
+                ViewData[MessageConstant.SuccessMessage] = "Role removed successfully!";
+            }
+            catch (Exception)
+            {
+                ViewData[MessageConstant.ErrorMessage] = "Something went wrong!";
+            }
+
+            var roles = await service.GetRolesAsync();
+
+            return View(nameof(Index), roles);
         }
     }
 }

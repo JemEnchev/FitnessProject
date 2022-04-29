@@ -6,7 +6,6 @@
     using FitnessProject.Infrastructure.Data.Identity;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
 
     public class UserManagerController : BaseController
     {
@@ -32,8 +31,8 @@
 
             if (user == null)
             {
-                ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
-                return View("NotFound");
+                ViewData[MessageConstant.ErrorMessage] = "Something went wrong!";
+                return View(nameof(NotFound));
             }
             ViewBag.UserName = user.UserName;
 
@@ -48,6 +47,7 @@
 
             if (user == null)
             {
+                ViewData[MessageConstant.ErrorMessage] = "Something went wrong!";
                 return View();
             }
 
@@ -71,17 +71,34 @@
 
             ViewData[MessageConstant.SuccessMessage] = "Successfully editted user roles!";
 
-            return RedirectToAction("Index");
+            var users = await service.GetUsersAsync();
+
+            return View(nameof(Index), users);
         }
 
-        [HttpPost]
         public async Task<IActionResult> DeleteUser(string userEmail)
         {
             if (!string.IsNullOrEmpty(userEmail))
             {
-                await service.DeleteUserAsync(userEmail);
+                try
+                {
+                    await service.DeleteUserAsync(userEmail);
+
+                    ViewData[MessageConstant.SuccessMessage] = "User deleted successfully!";
+                }
+                catch (Exception)
+                {
+                    ViewData[MessageConstant.ErrorMessage] = "Something went wrong!";
+                }
             }
-            return RedirectToAction("Index");
+            else
+            {
+                ViewData[MessageConstant.ErrorMessage] = "Something went wrong!";
+            }
+
+            var users = await service.GetUsersAsync();
+
+            return View(nameof(Index), users);
         }
 
         public IActionResult CreateUser()
@@ -103,7 +120,7 @@
                 //}
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
     }
 }
