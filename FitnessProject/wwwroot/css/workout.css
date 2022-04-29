@@ -1,0 +1,10 @@
+﻿.card__content {
+    line-height: 1.5;
+    font-size: 0.9em;
+    padding: 15px;
+    background: #fafafa;
+    border-right: 1px solid #333333;
+    border-left: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-top: 1px solid #333333;
+}
