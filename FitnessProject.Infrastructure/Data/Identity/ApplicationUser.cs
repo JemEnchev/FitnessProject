@@ -15,8 +15,6 @@
         public string LastName { get; set; }
 
 
-        public ICollection<Workout> Workouts { get; set; } = new List<Workout>();
-
         public ICollection<Diet> Diets { get; set; } = new List<Diet>();
 
         public ICollection<UserExercise> FavouriteExercises { get; set; } = new List<UserExercise>();
