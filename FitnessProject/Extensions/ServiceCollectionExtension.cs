@@ -19,7 +19,7 @@
             services.AddScoped<ISupplementBrandService, SupplementBrandService>();
             services.AddScoped<ISupplementFlavourService, SupplementFlavourService>();
             services.AddScoped<IExerciseService, ExerciseService>();
-            services.AddScoped<IWorkoutService, WorkoutService>();
+            services.AddScoped<IDietService, DietService>();
 
             return services;
         }

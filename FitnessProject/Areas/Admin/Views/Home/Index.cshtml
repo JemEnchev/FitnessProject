@@ -2,7 +2,108 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to admin area</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row">
+    <div class="col-3">
+        <div>
+            <div class="info-box">
+                <span class="info-box-icon bg-info">
+                    <i class="fas fa-user"></i>
+                </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Users</span>
+                    <span class="info-box-number">@ViewBag.Users</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div>
+            <div class="info-box">
+                <span class="info-box-icon bg-info">
+                    <i class="fas fa-prescription-bottle"></i>
+                    </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Supplements</span>
+                    <span class="info-box-number">@ViewBag.Supplements</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div>
+            <div class="info-box">
+                <span class="info-box-icon bg-info">
+                   <i class="fas fa-dumbbell"></i>
+                    </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Exercises</span>
+                    <span class="info-box-number">@ViewBag.Exercises</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div>
+            <div class="info-box">
+                <span class="info-box-icon bg-info">
+                 <i class="fas fa-apple-alt"></i>
+                    </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Foods</span>
+                    <span class="info-box-number">@ViewBag.Foods</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="row">
+    <div class="col-3">
+        <div>
+            <div class="info-box">
+                <span class="info-box-icon bg-info">
+                   <i class="fas fa-boxes"></i>
+                    </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Brands</span>
+                    <span class="info-box-number">@ViewBag.SupplementBrands</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div>
+            <div class="info-box">
+                <span class="info-box-icon bg-info">
+                   <i class="fab fa-pagelines"></i>
+                    </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Flavours</span>
+                    <span class="info-box-number">@ViewBag.SupplementFlavours</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div>
+            <div class="info-box">
+                <span class="info-box-icon bg-info">
+               <i class="fas fa-fire-alt"></i>
+                    </span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Diets</span>
+                    <span class="info-box-number">@ViewBag.Diets</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+

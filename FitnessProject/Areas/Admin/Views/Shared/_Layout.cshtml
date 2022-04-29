@@ -4,9 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - FitnessProject</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FitnessProject.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" href="~/plugins/toastr/toastr.min.css" />
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico">
+    <link rel="stylesheet" href="~/css/adminlte.min.css" />
+    
+
 </head>
 <body>
     <header>
@@ -57,10 +65,13 @@
             &copy; 2022 - FitnessProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/adminlte.min.js"></script>
     <script src="~/plugins/toastr/toastr.min.js"></script>
+    <partial name="_UserMessages" />
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

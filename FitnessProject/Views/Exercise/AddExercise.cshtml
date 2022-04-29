@@ -60,16 +60,30 @@
                     </div>
 
 
-                    <div>
-                        <label asp-for="Description">Description</label><br />
-                        <textarea class="form-control" asp-for="Description" placeholder="Enter description..." style="height:100px; width:-webkit-fill-available;" spellcheck="false"></textarea>
-                        <span asp-validation-for="Description"></span>
+                    <div class="row">
+                        <div class="col-8">
+                            <div>
+                                <label asp-for="Description">Description</label><br />
+                                <textarea class="form-control" asp-for="Description" placeholder="Enter description..." style="height:100px; width:-webkit-fill-available;" spellcheck="false"></textarea>
+                                <span asp-validation-for="Description"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div>
+                                <label asp-for="Video">Video</label><br />
+                                <textarea class="form-control" asp-for="Video" placeholder="Enter code..." style="height:100px; width:-webkit-fill-available;" spellcheck="false"></textarea>
+                                <span asp-validation-for="Video"></span>
+                            </div>
+                        </div>
                     </div>
+
+
 
                     <br />
 
 
-                    <div class="row">
+                    @*<div class="row">
                         <div class="col-8">
                             <div>
                                 <label asp-for="Requirements">Requirements</label><br />
@@ -79,15 +93,19 @@
                         </div>
                         <div class="col-4">
 
-                            <br /><br />
-
-                            <div class="form-control" style="text-align-last: center;">
-                                <label asp-for="Image">Image</label>
-                                <input class="form-control" asp-for="Image" placeholder="Browse">
-                                <span asp-validation-for="Image" class="text-danger"></span>
+                            <label asp-for="Image">Image</label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input asp-for="Image" type="file" class="custom-file-input">
+                                    <label class="custom-file-label" for="exampleInputFile">Browse</label>
+                                </div>
+                                
                             </div>
+                            <span asp-validation-for="Image" class="text-danger"></span>
+
+
                         </div>
-                    </div>
+                    </div>*@
 
                     <br />
 

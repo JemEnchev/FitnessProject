@@ -11,7 +11,6 @@
 
 
         <!-- HOME -->
-
         <li class="nav-item">
             <a href="/" class="nav-link">
                 <i class="fas fa-home"></i>
@@ -22,7 +21,6 @@
 
 
         <!-- FOODS -->
-
         <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="fas fa-apple-alt"></i>
@@ -79,10 +77,9 @@
 
 
         <!-- DIETS -->
-
         <li class="nav-item">
             <a href="#" class="nav-link">
-                <i class="fas fa-newspaper"></i>
+                <i class="fas fa-fire-alt"></i>
                 <p>
                     Diets
                     <i class="fas fa-angle-left right"></i>
@@ -94,14 +91,14 @@
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <li class="nav-item">
-                        <a href="layout/top-nav.html" class="nav-link" style="width: auto;">
+                        <a asp-controller="Diet" asp-action="MyDiets" asp-route-userEmail="@User.Identity?.Name" class="nav-link" style="width: auto;">
                             <i class="fas fa-cubes"></i>
                             <p>My Diets</p>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="layout/boxed.html" class="nav-link" style="width: auto;">
+                        <a asp-controller="Diet" asp-action="CreateDiet" class="nav-link" style="width: auto;">
                             <i class="fas fa-plus"></i>
                             <p>Create</p>
                         </a>
@@ -142,7 +139,7 @@
             <ul class="nav nav-treeview list-group" style="display: none;">
 
                 <li class="nav-item">
-                    <a asp-controller="Food" asp-action="AllFood" class="nav-link" style="width: auto;">
+                    <a asp-controller="Supplement" asp-action="AllSupplements" class="nav-link" style="width: auto;">
                         <i class="fas fa-cubes"></i>
                         <p>All</p>
                     </a>
@@ -152,7 +149,7 @@
                 {
 
                     <li class="nav-item">
-                        <a href="layout/top-nav-sidebar.html" class="nav-link" style="width: auto;">
+                        <a asp-controller="Supplement" asp-action="Favourites" asp-route-userEmail="@User.Identity?.Name" class="nav-link" style="width: auto;">
                             <i class="fas fa-heart"></i>
                             <p>Favourites</p>
                         </a>
@@ -244,7 +241,6 @@
 
 
         <!-- EXERCISES -->
-
         <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="fas fa-dumbbell"></i>
@@ -298,56 +294,6 @@
         </li>
 
 
-        <!-- WORKOUTS -->
-
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="fas fa-fire-alt"></i>
-                <p>
-                    Workouts
-                    <i class="fas fa-angle-left right"></i>
-                </p>
-            </a>
-
-            <ul class="nav nav-treeview list-group" style="display: none;">
-
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <li class="nav-item">
-                        <a href="layout/top-nav.html" class="nav-link" style="width: auto;">
-                            <i class="fas fa-cubes"></i>
-                            <p>My Workouts</p>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="layout/boxed.html" class="nav-link" style="width: auto;">
-                            <i class="fas fa-plus"></i>
-                            <p>Create</p>
-                        </a>
-                    </li>
-                }
-                else
-                {
-                    <li class="nav-item">
-                        <a asp-area="Identity" asp-page="/Account/Login" class="nav-link" style="width: auto;">
-                            <i class="fas fa-cubes"></i>
-                            <p>My Workouts</p>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a asp-area="Identity" asp-page="/Account/Login" class="nav-link" style="width: auto;">
-                            <i class="fas fa-plus"></i>
-                            <p>Create</p>
-                        </a>
-                    </li>
-                }
-
-
-            </ul>
-        </li>
-
 
         <!-- MANAGE -->
         @if (@User.IsInRole(UserConstants.Roles.Administrator))
@@ -370,7 +316,6 @@
         <ul class="nav nav-pills nav-sidebar flex-column " role="menu" data-accordion="false" style="padding-left: 8px;">
 
             <!-- ABOUT US -->
-
             <li class="nav-item">
                 <a asp-controller="AboutUs" asp-action="About" class="nav-link">
                     <i class="fas fa-info-circle"></i>
@@ -382,7 +327,6 @@
 
 
             <!-- CONTACT US -->
-
             <li class="nav-item">
                 <a asp-controller="AboutUs" asp-action="Contact" class="nav-link">
                     <i class="fas fa-comments"></i>

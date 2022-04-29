@@ -1,0 +1,58 @@
+﻿@using FitnessProject.Infrastructure.Data.Models
+@model Exercise
+
+@{
+    ViewData["Title"] = $"{Model.Name}";
+}
+
+<div class="card mb-3" style="max-width: 90%;margin-left: 5%;">
+    <div class="row no-gutters">
+        <div class="col-md-4">
+            <img src="~/img/@Model.Image" class="card-img" alt="image">
+        </div>
+        <div class="col-m-4">
+            <div class="card-body">
+
+
+                <h2 class="card-title">@Model.Name</h2>
+                <br /><br />
+                <p class="card-text">
+                    Muscle group: @Model.Category
+                </p>
+                <p class="card-text">
+                    Is it bodyweight: @Model.IsItBodyweight
+                </p>
+                <p class="card-text">
+                    Difficulty: @Model.Difficulty
+                </p>
+                <p class="card-text">
+                    Requirements: <br /> @Model.Requirements
+                </p>
+                <p class="card-text">
+                    Description: <br /> @Model.Description
+                </p>
+
+            </div>
+        </div>
+        <div class="col-m-4" style="align-self: center;margin-left: 10%;">
+            <iframe width="560" height="315" src="@Model.Video" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+            <div class="row">
+                <div class="col-6">
+                    <a asp-controller="Workout" asp-action="AddExerciseToWorkout" asp-route-exerciseName="@Model.Name" class="btn btn-block btn-info" style="margin-left: 80%;margin-top: 30%;width: max-content;">
+                        <i class="fas fa-plus"></i>
+                        Add to workout
+                        </a>
+                </div>
+
+                <div class="col-6">
+                    <a asp-controller="Exercise" asp-action="Favourites" asp-route-userEmail="@User.Identity?.Name" class="btn btn-block btn-info" style="margin-left: 80%;margin-top: 30%;width: fit-content;">
+                        <i class="fas fa-caret-left"></i>
+                        Back
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

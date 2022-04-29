@@ -1,11 +1,14 @@
 ﻿@using FitnessProject.Core.Constants
 @using FitnessProject.Core.Models
 @using FitnessProject.Infrastructure.Data.Models
-@model List<Exercise>
+@model List<Exercise_VM>
 
 @{
-    ViewData["Title"] = "Favourite Exercises";
+    ViewData["Title"] = "All Favourite Exercises";
 }
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="~/css/exercise.css">
 
 <div class="card">
     <div class="card-header">
@@ -16,76 +19,52 @@
         <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
             <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
                 <div class="col-sm-12">
-                    <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
-                        <thead>
-                            <tr>
-                                <th class="col-2">
-                                    Name
-                                </th>
 
-                                <th>
-                                    Category
-                                </th>
+                    <div class="cards">
 
-                                <th class="col-1">
-                                    Bodyweight
-                                </th>
+                        @foreach (var exercise in Model)
+                        {
+                            <div class="card">
+                                <img class="card__image" src="~/img/@exercise.Image" alt="">
+                                <div class="card__content">
+                                    <div class="row">
+                                        <br>
+                                        <div class="col-6">
+                                            <p>
+                                                @exercise.Name
+                                            </p>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <a class="btn btn-block btn-info btn-sm" asp-controller="Exercise" asp-action="ExerciseInfo" asp-route-exerciseName="@exercise.Name" asp-route-targetView="ExerciseInfoFavourites">
+                                                        <i class="fas fa-info-circle"></i>
+                                                    </a>
+                                                </div>
 
-                                <th class="col-1">
-                                    Requirements
-                                </th>
+                                                <div class="col-6">
+                                                    <form asp-page-handler="Delete" method="OnGetDelete" onclick="return confirm('Are you sure you want to remove this?')">
+                                                        <a class="btn btn-block btn-danger btn-sm" asp-controller="Exercise" asp-action="RemoveFromFavourites" asp-route-exerciseName="@exercise.Name" asp-route-userEmail="@User.Identity?.Name">
+                                                            <i class="fas fa-heart-broken"></i>
+                                                        </a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
 
-                                <th class="col-1">
-                                    Difficulty
-                                </th>
-
-                                <th>
-                                    Description
-                                </th>
-
-                                <th>
-                                    Image
-                                </th>
-
-                                <th class="col-1">
-                                    Remove
-                                </th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            @foreach (var exercise in Model)
-                            {
-                                <tr>
-                                    <td>@exercise.Name</td>
-                                    <td>@exercise.Category</td>
-                                    <td>@exercise.IsItBodyweight</td>
-                                    <td>@exercise.Requirements</td>
-                                    <td>@exercise.Difficulty</td>
-                                    <td>@exercise.Description</td>
-                                    <td>
-                                        <img src="~/img/@exercise.Image" width="100" height="100" asp-append-version="true">
-                                    </td>
-                                    <td class=" text-center">
-                                        <form asp-page-handler="Delete" method="OnGetDelete" onclick="return confirm('Are you sure you want to remove this?')">
-                                                <a class="btn btn-block btn-danger btn-sm" asp-controller="Exercise" asp-action="RemoveFromFavourites" asp-route-foodName="@exercise.Name" asp-route-userEmail="@User.Identity?.Name">
-                                                    <i class="fas fa-heart-broken"></i>
-                                                </a>
-                                            </form>
-                                    </td>
-                                </tr>
+                    </div>
 
 
-                            }
-                        </tbody>
-                    </table>
 
 
 
                 </div>
             </div>
-            <div class="row">
+            @*<div class="row">
                 <div class="col-sm-12 col-md-5"></div>
                 <div class="col-sm-12 col-md-7">
                     <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
@@ -141,8 +120,10 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div>*@
         </div>
     </div>
 
 </div>
+
+

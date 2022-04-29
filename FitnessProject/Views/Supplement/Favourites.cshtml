@@ -1,14 +1,15 @@
 ﻿@using FitnessProject.Core.Constants
 @using FitnessProject.Core.Models
-@model List<BrandList_VM>
+@using FitnessProject.Core.Models.Supplement
+@model List<SupplementList_VM>
 
 @{
-    ViewData["Title"] = "All Supplement Brands";
+    ViewData["Title"] = "All Favourite Supplements";
 }
 
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Data table with all supplement brands</h3>
+        <h3 class="card-title">Data table with all favourite supplements</h3>
     </div>
 
     <div class="card-body">
@@ -18,11 +19,27 @@
                     <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
                         <thead>
                             <tr>
-                                <th class="col-5">
+                                <th class="col-2">
                                     Name
                                 </th>
 
-                                <th class="col-5">
+                                <th>
+                                    Type
+                                </th>
+
+                                <th class="col-1">
+                                    Weight
+                                </th>
+
+                                <th class="col-2">
+                                    Flavour
+                                </th>
+
+                                <th class="col-2">
+                                    Brand
+                                </th>
+
+                                <th>
                                     Description
                                 </th>
 
@@ -30,23 +47,27 @@
                                     Remove
                                 </th>
 
+
                             </tr>
                         </thead>
                         <tbody>
 
-                            @foreach (var brand in Model)
+                            @foreach (var supplement in Model)
                             {
                                 <tr>
-                                    <td>@brand.Name</td>
-                                    <td>@brand.Description</td>
+                                    <td>@supplement.Name</td>
+                                    <td>@supplement.Type</td>
+                                    <td>@supplement.Weight</td>
+                                    <td>@supplement.FlavourName</td>
+                                    <td>@supplement.BrandName</td>
+                                    <td>@supplement.Description</td>
                                     <td class="text-center">
-                                        <div class="col-6">
-                                            <form asp-page-handler="Delete" method="OnGetDelete" onclick="return confirm('Are you sure you want to delete this?')">
-                                                <a class="btn btn-block btn-danger btn-sm" asp-controller="SupplementBrand" asp-action="Remove" asp-route-brandName="@brand.Name">
-                                                    <i class="fas fa-times"></i>
+                                        <form asp-page-handler="Delete" method="OnGetDelete" onclick="return confirm('Are you sure you want to remove this?')">
+                                                <a class="btn btn-block btn-danger btn-sm" asp-controller="Supplement" asp-action="RemoveFromFavourites" asp-route-supplementId="@supplement.Id" asp-route-userEmail="@User.Identity?.Name">
+                                                    <i class="fas fa-heart-broken"></i>
                                                 </a>
                                             </form>
-                                        </div>
+
                                     </td>
                                 </tr>
                             }

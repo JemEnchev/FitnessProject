@@ -47,9 +47,9 @@
                         <div class="col-4">
                             <div class="form-group">
                                 <label asp-for="FlavourId">Flavour</label>
-                               @* <select asp-for="FlavourId" asp-items="@Model.Flavours" class="form-control">
+                                <select asp-for="FlavourId" asp-items="@ViewBag.Flavours" class="form-control">
                                     <option value="" selected disabled>Select flavour</option>
-                                </select>*@
+                                </select>
                                 <span asp-validation-for="FlavourId"></span>
                             </div>
                         </div>
@@ -59,9 +59,9 @@
 
                     <div class="form-group">
                         <label asp-for="BrandId">Brand</label>
-                        @*<select asp-for="BrandId" asp-items="@Model.Brands" class="form-control">
+                        <select asp-for="BrandId" asp-items="@ViewBag.Brands" class="form-control">
                             <option value="" selected disabled>Select brand</option>
-                        </select>*@
+                        </select>
                         <span asp-validation-for="BrandId"></span>
                     </div>
 
