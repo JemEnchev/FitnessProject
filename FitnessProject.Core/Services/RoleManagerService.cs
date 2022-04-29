@@ -45,6 +45,14 @@
                 {
                     await roleManager.DeleteAsync(role);
                 }
+                else
+                {
+                    throw new ArgumentException();
+                }
+            }
+            else
+            {
+                throw new NullReferenceException();
             }
         }
     }

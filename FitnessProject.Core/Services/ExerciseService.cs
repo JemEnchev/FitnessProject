@@ -44,9 +44,9 @@
                 Video = model.Video,
             };
 
-            if (repo.All<Exercise>().FirstOrDefault(e => e.Name == exercise.Name) != null)
+            if (await repo.All<Exercise>().FirstOrDefaultAsync(e => e.Name == exercise.Name) != null)
             {
-                return;
+                throw new ArgumentException("Exercise already exists!");
             }
 
             await repo.AddAsync(exercise);
@@ -92,31 +92,15 @@
 
             var imagePath = Path.Combine(webHostEnvironment.WebRootPath, "img", exercise.Image);
 
-            try
-            {
-                repo.Delete(exercise);
-                await repo.SaveChangesAsync();
+            repo.Delete(exercise);
+            await repo.SaveChangesAsync();
 
-                File.Delete(imagePath);
-            }
-            catch (Exception)
-            { }
+            File.Delete(imagePath);
         }
 
         public async Task<Exercise> GetExerciseByNameAsync(string exerciseName)
         {
             return await repo.All<Exercise>()
-                //.Where(e => e.Name == exerciseName)
-                //.Select(e => new Exercise_VM()
-                //{
-                //    Name = e.Name,
-                //    Category = e.Category,
-                //    Description = e.Description,
-                //    IsItBodyweight = e.IsItBodyweight,
-                //    Requirements = e.Requirements,
-                //    Difficulty = e.Difficulty,
-                //    Image = e.Image,
-                //})
                 .FirstOrDefaultAsync(e => e.Name == exerciseName);
         }
 
@@ -138,14 +122,17 @@
 
                 if (!repo.All<UserExercise>().Contains(userExercise))
                 {
-                    try
-                    {
-                        await repo.AddAsync(userExercise);
-                        await repo.SaveChangesAsync();
-                    }
-                    catch (Exception)
-                    { }
+                    await repo.AddAsync(userExercise);
+                    await repo.SaveChangesAsync();
                 }
+                else
+                {
+                    throw new ArgumentException("Already added to favourites!");
+                }
+            }
+            else
+            {
+                throw new NullReferenceException();
             }
         }
 
@@ -187,6 +174,10 @@
 
                 repo.Delete(userExercise);
                 await repo.SaveChangesAsync();
+            }
+            else
+            {
+                throw new NullReferenceException();
             }
         }
     }

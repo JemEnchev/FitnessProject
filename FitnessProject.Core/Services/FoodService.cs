@@ -36,9 +36,9 @@
                 FatPer100 = model.FatPer100,
             };
 
-            if (repo.All<Food>().FirstOrDefault(f => f.Name == food.Name) != null)
+            if (await repo.All<Food>().FirstOrDefaultAsync(f => f.Name == food.Name) != null)
             {
-                return;
+                throw new ArgumentException("Food already exists!");
             }
 
             await repo.AddAsync(food);
@@ -63,14 +63,17 @@
 
                 if (!repo.All<UserFood>().Contains(userFood))
                 {
-                    try
-                    {
-                        await repo.AddAsync(userFood);
-                        await repo.SaveChangesAsync();
-                    }
-                    catch (Exception)
-                    {}
+                    await repo.AddAsync(userFood);
+                    await repo.SaveChangesAsync();
                 }
+                else
+                {
+                    throw new ArgumentException("Food already added to favourites!");
+                }
+            }
+            else
+            {
+                throw new NullReferenceException();
             }
         }
 
@@ -113,13 +116,8 @@
         {
             var food = await GetFoodByNameAsync(foodName);
 
-            try
-            {
-                repo.Delete(food);
-                await repo.SaveChangesAsync();
-            }
-            catch (Exception)
-            {}
+            repo.Delete(food);
+            await repo.SaveChangesAsync();
         }
 
         public async Task RemoveFromFavouritesAsync(string foodName, string userEmail)
@@ -137,9 +135,13 @@
                     FoodId = food.Id,
                     Food = food,
                 };
-                
+
                 repo.Delete(userFood);
                 await repo.SaveChangesAsync();
+            }
+            else
+            {
+                throw new ArgumentNullException();
             }
         }
 

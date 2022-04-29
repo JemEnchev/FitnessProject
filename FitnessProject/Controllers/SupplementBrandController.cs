@@ -34,9 +34,28 @@
         {
             if (ModelState.IsValid)
             {
-                await service.AddSupplementBrandAsync(model);
+                try
+                {
+                    await service.AddSupplementBrandAsync(model);
 
-                return RedirectToAction(nameof(AllBrands));
+                    ViewData[MessageConstant.SuccessMessage] = "Brand added successfully!";
+                }
+                catch (ArgumentNullException ax)
+                {
+                    ViewData[MessageConstant.ErrorMessage] = ax.Message;
+                }
+                catch (Exception)
+                {
+                    ViewData[MessageConstant.ErrorMessage] = "Something went wrong!";
+                }
+
+                var allBrands = await service.GetAllSupplementBrandsAsync();
+
+                return View(nameof(AllBrands), allBrands);
+            }
+            else
+            {
+                ViewData[MessageConstant.ErrorMessage] = "Something went wrong!";
             }
 
             return View();
@@ -44,12 +63,20 @@
 
         public async Task<IActionResult> Remove(string brandName)
         {
-            if (ModelState.IsValid)
-            {
-                await service.RemoveSupplementBrandAsync(brandName);
-            }
+                try
+                {
+                    await service.RemoveSupplementBrandAsync(brandName);
 
-            return RedirectToAction(nameof(AllBrands));
+                    ViewData[MessageConstant.SuccessMessage] = "Brand removed successfully!";
+                }
+                catch (Exception)
+                {
+                    ViewData[MessageConstant.ErrorMessage] = "Something went wrong!";
+                }
+
+            var allBrands = await service.GetAllSupplementBrandsAsync();
+
+            return View(nameof(AllBrands), allBrands);
         }
     }
 }

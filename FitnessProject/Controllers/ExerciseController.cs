@@ -19,6 +19,7 @@
             service = _service;
         }
 
+
         public async Task<IActionResult> AllExercises()
         {
             var allExercises = await service.GetAllExercisesAsync();
@@ -37,19 +38,43 @@
         [Authorize]
         public async Task<IActionResult> AddToFavourites(string exerciseName, string userEmail)
         {
-            await service.AddToFavouritesAsync(exerciseName, userEmail);
+            try
+            {
+                await service.AddToFavouritesAsync(exerciseName, userEmail);
 
-            return RedirectToAction(nameof(AllExercises));
+                ViewData[MessageConstant.SuccessMessage] = "Exercise added successfully!";
+            }
+            catch (ArgumentException ax)
+            {
+                ViewData[MessageConstant.ErrorMessage] = ax.Message;
+            }
+            catch (Exception)
+            {
+                ViewData[MessageConstant.ErrorMessage] = "Something went wrong!";
+            }
+
+            var allExercises = await service.GetAllExercisesAsync();
+
+            return View(nameof(AllExercises), allExercises);
         }
 
         [Authorize]
-        public async Task<IActionResult> RemoveFromFavourites(string foodName, string userEmail)
+        public async Task<IActionResult> RemoveFromFavourites(string exerciseName, string userEmail)
         {
-            await service.RemoveFromFavouritesAsync(foodName, userEmail);
+            try
+            {
+                await service.RemoveFromFavouritesAsync(exerciseName, userEmail);
 
-            var favourites = await service.GetAllFavouritesAsync(userEmail);
+                ViewData[MessageConstant.SuccessMessage] = "Removed successfully!";
+            }
+            catch (Exception)
+            {
+                ViewData[MessageConstant.ErrorMessage] = "Something went wrong!";
+            }
 
-            return View("Favourites", favourites);
+            var allExercises = await service.GetAllExercisesAsync();
+
+            return View(nameof(AllExercises), allExercises);
         }
 
         [Authorize(Roles = UserConstants.Roles.Trainer)]
@@ -64,9 +89,28 @@
         {
             if (ModelState.IsValid)
             {
-                await service.AddExerciseAsync(model);
+                try
+                {
+                    await service.AddExerciseAsync(model);
 
-                return RedirectToAction(nameof(AllExercises));
+                    ViewData[MessageConstant.SuccessMessage] = "Exercise created successfully!";
+                }
+                catch (ArgumentException ax)
+                {
+                    ViewData[MessageConstant.ErrorMessage] = ax.Message;
+                }
+                catch (Exception)
+                {
+                    ViewData[MessageConstant.ErrorMessage] = "Something went wrong!";
+                }
+
+                var allExercises = await service.GetAllExercisesAsync();
+
+                return View(nameof(AllExercises), allExercises);
+            }
+            else
+            {
+                ViewData[MessageConstant.ErrorMessage] = "Something went wrong!";
             }
 
             return View();
@@ -78,7 +122,34 @@
         {
             if (ModelState.IsValid)
             {
-                await service.RemoveExerciseAsync(exerciseName);
+                try
+                {
+                    await service.RemoveExerciseAsync(exerciseName);
+
+                    ViewData[MessageConstant.SuccessMessage] = "Exercise removed successfully!";
+                }
+                catch (Exception)
+                {
+                    ViewData[MessageConstant.ErrorMessage] = "Something went wrong!";
+                }
+            }
+            else
+            {
+                ViewData[MessageConstant.ErrorMessage] = "Something went wrong!";
+            }
+
+            var allExercises = await service.GetAllExercisesAsync();
+
+            return View(nameof(AllExercises), allExercises);
+        }
+
+        public async Task<IActionResult> ExerciseInfo(string exerciseName, string targetView)
+        {
+            if (ModelState.IsValid)
+            {
+                var exercise = await service.GetExerciseByNameAsync(exerciseName);
+
+                return View(targetView, exercise);
             }
 
             return RedirectToAction(nameof(AllExercises));

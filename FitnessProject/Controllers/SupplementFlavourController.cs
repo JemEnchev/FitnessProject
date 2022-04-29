@@ -30,13 +30,32 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFlavour(AddSupplementFlavour_VM model)
+        public async Task<IActionResult> AddFlavour(AddFlavour_VM model)
         {
             if (ModelState.IsValid)
             {
-                await service.AddSupplementFlavourAsync(model);
+                try
+                {
+                    await service.AddSupplementFlavourAsync(model);
 
-                return RedirectToAction(nameof(AllFlavours));
+                    ViewData[MessageConstant.SuccessMessage] = "Flavour added successfully!";
+                }
+                catch (ArgumentNullException ax)
+                {
+                    ViewData[MessageConstant.ErrorMessage] = ax.Message;
+                }
+                catch (Exception)
+                {
+                    ViewData[MessageConstant.ErrorMessage] = "Something went wrong!";
+                }
+
+                var allFlavours = await service.GetAllSupplementFlavoursAsync();
+
+                return View(nameof(AllFlavours), allFlavours);
+            }
+            else
+            {
+                ViewData[MessageConstant.ErrorMessage] = "Something went wrong!";
             }
 
             return View();
@@ -44,12 +63,20 @@
 
         public async Task<IActionResult> Remove(string flavourName)
         {
-            if (ModelState.IsValid)
-            {
-                await service.RemoveSupplementFlavourAsync(flavourName);
-            }
+                try
+                {
+                    await service.RemoveSupplementFlavourAsync(flavourName);
 
-            return RedirectToAction(nameof(AllFlavours));
+                    ViewData[MessageConstant.SuccessMessage] = "Flavour removed successfully!";
+                }
+                catch (Exception)
+                {
+                    ViewData[MessageConstant.ErrorMessage] = "Something went wrong!";
+                }
+
+            var allFlavours = await service.GetAllSupplementFlavoursAsync();
+
+            return View(nameof(AllFlavours), allFlavours);
         }
     }
 }

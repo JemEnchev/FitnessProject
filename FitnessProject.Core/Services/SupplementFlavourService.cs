@@ -25,9 +25,9 @@
                 Description = model.Description,
             };
 
-            if (repo.All<SupplementFlavour>().FirstOrDefault(f => f.Name == model.Name) != null)
+            if (await repo.All<SupplementFlavour>().FirstOrDefaultAsync(f => f.Name == model.Name) != null)
             {
-                return;
+                throw new ArgumentException("Flavour already exists!");
             }
 
             await repo.AddAsync(flavour);
@@ -47,8 +47,7 @@
 
         public async Task<SupplementFlavour> GetFlavourByIdAsync(Guid flavourId)
         {
-            return await repo.All<SupplementFlavour>()
-                .FirstOrDefaultAsync(f => f.Id == flavourId);
+            return await repo.GetByIdAsync<SupplementFlavour>(flavourId);
         }
 
         public async Task<SupplementFlavour> GetFlavourByNameAsync(string flavourName)
@@ -63,13 +62,12 @@
 
             if (flavour != null)
             {
-                try
-                {
-                    repo.Delete(flavour);
-                    await repo.SaveChangesAsync();
-                }
-                catch (Exception)
-                { }
+                repo.Delete(flavour);
+                await repo.SaveChangesAsync();
+            }
+            else
+            {
+                throw new NullReferenceException();
             }
         }
     }

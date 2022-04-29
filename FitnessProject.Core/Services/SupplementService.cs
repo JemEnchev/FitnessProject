@@ -47,7 +47,7 @@
                 Flavour = await supplementFlavourService.GetFlavourByIdAsync(model.FlavourId),
             };
 
-            if (repo.All<Supplement>().FirstOrDefault(s => 
+            if (await repo.All<Supplement>().FirstOrDefaultAsync(s =>
                 s.Name == supplement.Name &&
                 s.Description == supplement.Description &&
                 s.Weight == supplement.Weight &&
@@ -55,7 +55,7 @@
                 s.Brand == supplement.Brand &&
                 s.Flavour == supplement.Flavour) != null)
             {
-                return;
+                throw new ArgumentException("Supplement already exists!");
             }
 
             await repo.AddAsync(supplement);
@@ -80,14 +80,17 @@
 
                 if (!repo.All<UserSupplement>().Contains(userSupplement))
                 {
-                    try
-                    {
                         await repo.AddAsync(userSupplement);
                         await repo.SaveChangesAsync();
-                    }
-                    catch (Exception)
-                    { }
                 }
+                else
+                {
+                    throw new ArgumentException("Supplement already added to favourites!");
+                }
+            }
+            else
+            {
+                throw new NullReferenceException();
             }
         }
 
@@ -119,7 +122,7 @@
                      Name = s.Name,
                      Description = s.Description,
                      Weight = s.Weight,
-                     Type=s.Type,
+                     Type = s.Type,
                      BrandName = s.Brand.Name,
                      FlavourName = s.Flavour.Name,
                  })
@@ -167,25 +170,23 @@
                 repo.Delete(userSupplement);
                 await repo.SaveChangesAsync();
             }
+            else
+            {
+                throw new NullReferenceException();
+            }
         }
 
         public async Task RemoveSupplementAsync(Guid supplementId)
         {
             var supplement = await GetSupplementByIdAsync(supplementId);
 
-            try
-            {
-                repo.Delete(supplement);
-                await repo.SaveChangesAsync();
-            }
-            catch (Exception)
-            { }
+            repo.Delete(supplement);
+            await repo.SaveChangesAsync();
         }
 
         private async Task<Supplement> GetSupplementByIdAsync(Guid supplementId)
         {
-            return await repo.All<Supplement>()
-                .FirstOrDefaultAsync(s => s.Id == supplementId);
+            return await repo.GetByIdAsync<Supplement>(supplementId);
         }
     }
 }

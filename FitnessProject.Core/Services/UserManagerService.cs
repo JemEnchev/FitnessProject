@@ -95,9 +95,17 @@
 
         public async Task DeleteUserAsync(string userEmail)
         {
-            var user = await GetUserByEmailAsync(userEmail);
-            if (user != null)
-                await userManager.DeleteAsync(user);
+            try
+            {
+                var user = await GetUserByEmailAsync(userEmail);
+                if (user != null)
+                    await userManager.DeleteAsync(user);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            
         }
 
         public async Task CreateUserAsync(CreateUser_VM model)

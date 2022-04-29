@@ -25,9 +25,9 @@
                 Description = model.Description,
             };
 
-            if (repo.All<SupplementBrand>().FirstOrDefault(b => b.Name == model.Name) != null)
+            if (await repo.All<SupplementBrand>().FirstOrDefaultAsync(b => b.Name == model.Name) != null)
             {
-                return;
+                throw new ArgumentException("Brand already exists!");
             }
 
             await repo.AddAsync(brand);
@@ -47,8 +47,7 @@
 
         public async Task<SupplementBrand> GetBrandByIdAsync(Guid brandId)
         {
-            return await repo.All<SupplementBrand>()
-                .FirstOrDefaultAsync(b => b.Id == brandId);
+            return await repo.GetByIdAsync<SupplementBrand>(brandId);
         }
 
         public async Task<SupplementBrand> GetBrandByNameAsync(string brandName)
@@ -63,13 +62,12 @@
 
             if (brand != null)
             {
-                try
-                {
                     repo.Delete(brand);
                     await repo.SaveChangesAsync();
-                }
-                catch (Exception)
-                {}
+            }
+            else
+            {
+                throw new NullReferenceException();
             }
         }
     }
